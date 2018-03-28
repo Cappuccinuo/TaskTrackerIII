@@ -1,8 +1,8 @@
 #!/bin/bash
 
-export PORT=5103
+export PORT=5105
 export MIX_ENV=prod
-export GIT_PATH=/home/tasktracker/src/tasktracker
+export GIT_PATH=/home/tasktracker3/src/tasktracker3
 
 PWD=`pwd`
 if [ $PWD != $GIT_PATH ]; then
@@ -11,7 +11,7 @@ if [ $PWD != $GIT_PATH ]; then
 	exit 1
 fi
 
-if [ $USER != "tasktracker" ]; then
+if [ $USER != "tasktracker3" ]; then
 	echo "Error: must run as user 'tasktracker'"
 	echo "  Current user is $USER"
 	exit 2
@@ -27,17 +27,17 @@ mkdir -p ~/www
 mkdir -p ~/old
 
 NOW=`date +%s`
-if [ -d ~/www/tasktracker ]; then
-	echo mv ~/www/tasktracker ~/old/$NOW
-	mv ~/www/tasktracker ~/old/$NOW
+if [ -d ~/www/tasktracker3 ]; then
+	echo mv ~/www/tasktracker3 ~/old/$NOW
+	mv ~/www/tasktracker3 ~/old/$NOW
 fi
 
-mkdir -p ~/www/tasktracker
-REL_TAR=~/src/tasktracker/_build/prod/rel/tasktracker/releases/0.0.1/tasktracker.tar.gz
-(cd ~/www/tasktracker && tar xzvf $REL_TAR)
+mkdir -p ~/www/tasktracker3
+REL_TAR=~/src/tasktracker3/_build/prod/rel/tasktracker3/releases/0.0.1/tasktracker3.tar.gz
+(cd ~/www/tasktracker3 && tar xzvf $REL_TAR)
 
 crontab - <<CRONTAB
-@reboot bash /home/memory2/src/tasktracker/start.sh
+@reboot bash /home/tasktracker3/src/tasktracker3/start.sh
 CRONTAB
 
 #. start.sh

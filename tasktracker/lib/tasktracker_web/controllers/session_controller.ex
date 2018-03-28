@@ -7,8 +7,9 @@ defmodule TasktrackerWeb.SessionController do
     render conn, "new.html"
   end
 
-  def create(conn, %{"session" => %{"email" => email, "name" => name}}) do
-    user = Repo.get_by(User, email: email, name: name)
+  def create(conn, %{"session" => %{"email" => email, "name" => name, "password" => password}}) do
+    user = get_and_auth_user(email, name, password)
+    #user = Repo.get_by(User, email: email, name: name)
 
     result = cond do
       user ->
@@ -26,6 +27,15 @@ defmodule TasktrackerWeb.SessionController do
         conn
         |> put_flash(:error, "Invalid email/username combination")
         |> render("new.html")
+    end
+  end
+
+  def get_and_auth_user(email, name, password) do
+    #user = Accounts.get_user_by_email(email)
+    user = Repo.get_by(User, email: email, name: name)
+    case Comeonin.Argon2.check_pass(user, password) do
+      {:ok, user} -> user
+      _else       -> nil
     end
   end
 
