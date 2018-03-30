@@ -2,10 +2,11 @@ defmodule TaskTracker.Users.User do
   use Ecto.Schema
   import Ecto.Changeset
 
-
   schema "users" do
     field :email, :string
     field :name, :string
+    field :password_hash, :string
+    field :password, :string, virtual: true
 
     timestamps()
   end
@@ -16,4 +17,5 @@ defmodule TaskTracker.Users.User do
     |> cast(attrs, [:email, :name])
     |> validate_required([:email, :name])
   end
+
 end

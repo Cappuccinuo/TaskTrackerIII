@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { NavItem } from 'reactstrap';
+import Login from "./login"
 
 export default function Nav(props) {
   return <header className="header">
@@ -15,6 +16,9 @@ export default function Nav(props) {
           <NavLink to="/tasks" exact={true} activeClassName="active" className="nav-link">
             Tasks
           </NavLink>
+        </li>
+        <li>
+          <Login />
         </li>
       </ul>
     </nav>

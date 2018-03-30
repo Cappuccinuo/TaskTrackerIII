@@ -9,10 +9,14 @@
 
     <title>Hello TaskTracker!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   </head>
 
   <body>
-    
+
     <div class="container">
       <%= if get_flash(@conn, :info) do %>
         <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>

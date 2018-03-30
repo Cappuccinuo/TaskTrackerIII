@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Nav from './nav'
+import Newtask from './newtask'
 
 export default function tasktracker_init() {
   ReactDOM.render(
@@ -20,6 +21,8 @@ class Tasktracker extends React.Component {
             <p>test</p>} />
           <Route path="/tasks" exact={true} render={() =>
             <p>test2</p>} />
+          <Route path="/newtask" exact={true} render={() =>
+            <Newtask />} /> 
           <Route path="/" exact={true} render={() =>
             <div className="jumbotron">
               <h2>Welcome to Task Tracker</h2>
