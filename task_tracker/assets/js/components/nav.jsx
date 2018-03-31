@@ -62,6 +62,11 @@ function Nav(props) {
           </NavLink>
         </li>
         <li>
+          <NavLink to="/newtask" exact={true} activeClassName="active" className="nav-link">
+            New Task
+          </NavLink>
+        </li>
+        <li>
           { session_info }
         </li>
       </ul>

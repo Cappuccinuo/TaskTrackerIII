@@ -16,7 +16,7 @@ export default function Tasks(params) {
   let tasks = _.map(params.tasks, (tt) => <Task key={tt.id} task={tt} />);
   return (
     <div>
-      <h2>All Users</h2>
+      <h2>All Tasks</h2>
       <table className="table table-bordered table-dark">
         <thead>
           <tr>

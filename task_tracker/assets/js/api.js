@@ -47,6 +47,21 @@ class TheServer {
       },
     });
   }
+
+  submit_task(data) {
+    $.ajax("/api/v1/tasks", {
+      method: "post",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify({ token: data.token, task: data }),
+      success: (resp) => {
+        store.dispatch({
+          type: 'ADD_TASK',
+          task: resp.data,
+        });
+      },
+    });
+  }
 }
 
 export default new TheServer();
