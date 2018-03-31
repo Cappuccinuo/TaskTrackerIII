@@ -20,5 +20,12 @@ import "phoenix_html";
 
 // import socket from "./socket"
 
+import store from './store';
+import api from './api';
+
 import tasktracker_init from './components/tasktracker';
-$(tasktracker_init);
+$(function() {
+  api.request_users();
+  api.request_tasks();
+  tasktracker_init(store);
+})

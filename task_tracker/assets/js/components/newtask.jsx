@@ -2,32 +2,36 @@ import React from 'react';
 
 export default function Newtask(params) {
   return (
-    <form className="form-style-7">
-      <ul>
-        <li>
-            <label>Name</label>
-            <input type="text" name="name" maxLength="100"/>
-            <span>Enter your full name here</span>
-        </li>
-        <li>
-            <label>Email</label>
-            <input type="email" name="email" maxLength="100"/>
-            <span>Enter a valid email address</span>
-        </li>
-        <li>
-            <label>Website</label>
-            <input type="url" name="url" maxLength="100"/>
-            <span>Your website address (eg: http://www.google.com)</span>
-        </li>
-        <li>
-            <label>About You</label>
-            <textarea name="bio"></textarea>
-            <span>Say something about yourself</span>
-        </li>
-        <li>
-            <input type="submit" value="Send This" />
-        </li>
-      </ul>
+    <form>
+      <h2>New Task</h2>
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input class="form-control"/>
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" rows="3"></textarea>
+      </div>
+      <div class="form-group">
+          <label class="form-check-label" for="complete">
+            Complete
+          </label>
+          <br />
+          <input class="form-check-input" type="checkbox" value=""/>
+      </div>
+      <div class="form-group">
+          <label class="form-check-label" for="complete">
+            Time Spent
+          </label>
+          <input class="form-control" type="number" step="15" min="0"/>
+      </div>
+      <div class="form-group">
+          <label class="form-check-label" for="complete">
+            Assigned Worker
+          </label>
+          <input class="form-control" type="number" min="1"/>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   );
 }

@@ -1,28 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Nav from './nav'
-import Newtask from './newtask'
+import React                                          from 'react';
+import ReactDOM                                       from 'react-dom';
+import { BrowserRouter as Router, Route }             from 'react-router-dom';
+import { Provider, connect }                          from 'react-redux';
+import Nav                                            from './nav'
+import Users                                          from './users'
+import Newtask                                        from './newtask'
+import Tasks                                          from './tasks'
 
-export default function tasktracker_init() {
+export default function tasktracker_init(store) {
   ReactDOM.render(
-    <Tasktracker />,
+    <Provider store={store}>
+      <Tasktracker state={store.getState()} />
+    </Provider>,
     document.getElementById('root')
   );
 }
-
-class Tasktracker extends React.Component {
-  render() {
+let Tasktracker = connect((state) => state)((props) => {
     return <Router>
       <div>
         <Nav />
         <div>
           <Route path="/users" exact={true} render={() =>
-            <p>test</p>} />
+            <Users users={props.users} />} />
           <Route path="/tasks" exact={true} render={() =>
-            <p>test2</p>} />
+            <Tasks tasks={props.tasks} />} />
           <Route path="/newtask" exact={true} render={() =>
-            <Newtask />} /> 
+            <Newtask />} />
           <Route path="/" exact={true} render={() =>
             <div className="jumbotron">
               <h2>Welcome to Task Tracker</h2>
@@ -30,6 +33,5 @@ class Tasktracker extends React.Component {
             </div>} />
         </div>
       </div>
-    </Router>;
-  }
-}
+    </Router>
+});
