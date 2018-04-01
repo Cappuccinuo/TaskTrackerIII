@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Input } from 'reactstrap';
 import api from '../api';
 
 function Newtask(props) {
@@ -39,7 +40,7 @@ function Newtask(props) {
       type: 'CLEAR_FORM',
     });
   }
-
+  let users = _.map(props.users, (uu) => <option key={uu.id} value={uu.id}>{uu.name}</option>);
   return (
     <form>
       <h2>New Task</h2>
@@ -56,10 +57,23 @@ function Newtask(props) {
       </div>
       <div className="form-group">
           <label className="form-check-label">
+            Boss
+          </label>
+          <Input className="form-control" type="select"
+            name="boss_id" value={props.form.boss_id} onChange={update}>
+            <option></option>
+            {users}
+          </Input>
+      </div>
+      <div className="form-group">
+          <label className="form-check-label">
             Assigned Worker
           </label>
-          <input className="form-control" type="number" min="1"
-            name="user_id" value={props.form.user_id} onChange={update}/>
+          <Input className="form-control" type="select"
+            name="user_id" value={props.form.user_id} onChange={update}>
+            <option></option>
+            {users}
+          </Input>
       </div>
       <button onClick={submit} className="btn btn-primary">Submit</button>
     </form>
