@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, Redirect, Link } from 'react-router-dom';
-import Login from "./login";
+import Login from "./account/login";
 import api from '../api';
 import { connect } from 'react-redux';
 import { Form, FormGroup, Input, Button } from 'reactstrap';
@@ -52,41 +52,52 @@ function Nav(props) {
 
   if (props.token) {
     session_info = <Session token={props.token} />;
+    return <header className="header">
+      <nav role="navigation">
+        <ul className="nav nav-pills pull-right">
+          <li>
+            <NavLink to="/users" exact={true} activeClassName="active" className="nav-link">
+              All Users
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/tasks" exact={true} activeClassName="active" className="nav-link">
+              All Tasks
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/newtask" exact={true} activeClassName="active" className="nav-link">
+              New Task
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/mytasks" exact={true} activeClassName="active" className="nav-link">
+              My Task
+            </NavLink>
+          </li>
+          <li>
+            { session_info }
+          </li>
+        </ul>
+      </nav>
+      <span className="logo"></span>
+    </header>;
   }
   else {
     session_info = <LoginForm />
+    return <header className="header">
+      <nav role="navigation">
+        <ul className="nav nav-pills pull-right">
+          <li>
+            { session_info }
+          </li>
+        </ul>
+      </nav>
+      <span className="logo"></span>
+    </header>;
   }
 
-  return <header className="header">
-    <nav role="navigation">
-      <ul className="nav nav-pills pull-right">
-        <li>
-          <NavLink to="/users" exact={true} activeClassName="active" className="nav-link">
-            All Users
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/tasks" exact={true} activeClassName="active" className="nav-link">
-            All Tasks
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/newtask" exact={true} activeClassName="active" className="nav-link">
-            New Task
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/mytasks" exact={true} activeClassName="active" className="nav-link">
-            My Task
-          </NavLink>
-        </li>
-        <li>
-          { session_info }
-        </li>
-      </ul>
-    </nav>
-    <span className="logo"></span>
-  </header>;
+
 }
 
 function state2props(state) {

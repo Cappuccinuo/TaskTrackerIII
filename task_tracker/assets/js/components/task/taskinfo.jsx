@@ -1,4 +1,4 @@
-import api from '../api';
+import api from 'js/api';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Form, FormGroup, Input, Button } from 'reactstrap';

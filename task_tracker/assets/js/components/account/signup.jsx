@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Input } from 'reactstrap';
-import api from '../api';
+import api from 'js/api';
 
 function Signup(props) {
   console.log("props@SignupForm", props);

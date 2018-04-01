@@ -7,9 +7,9 @@ import Users                                                    from './account/
 import Newtask                                                  from './task/newtask'
 import Tasks                                                    from './task/tasks'
 import TaskInfo                                                 from './task/taskinfo'
-import Taskedit                                                from './task/taskedit'
+import Taskedit                                                 from './task/taskedit'
 import Signup                                                   from './account/signup'
-import Mytasks                                                   from './task/mytask'
+import Mytasks                                                  from './task/mytask'
 
 export default function tasktracker_init(store) {
   ReactDOM.render(
