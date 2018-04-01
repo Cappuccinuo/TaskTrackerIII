@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Redirect } from 'react-router-dom';
+import { NavLink, Redirect, Link } from 'react-router-dom';
 import Login from "./login";
 import api from '../api';
 import { connect } from 'react-redux';
@@ -21,7 +21,6 @@ let LoginForm = connect(({login}) => {return {login};})((props) => {
     console.log(props.login);
   }
 
-
   return <div className="navbar-text">
     <Form inline>
       <FormGroup>
@@ -29,6 +28,7 @@ let LoginForm = connect(({login}) => {return {login};})((props) => {
                value={props.login.email} onChange={update} />
       </FormGroup>
       <Button onClick={create_token}>Log In</Button>
+      <Link to="/signup">Sign up</Link>
     </Form>
   </div>;
 });

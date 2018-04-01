@@ -16,6 +16,8 @@ function users(state = [], action) {
   switch (action.type) {
   case 'USERS_LIST':
     return [...action.users];
+  case 'ADD_TASK':
+    return [action.user, ...state];
   default:
     return state;
   }

@@ -62,6 +62,21 @@ class TheServer {
       },
     });
   }
+
+  submit_user(data) {
+    $.ajax("/api/v1/users", {
+      method: "post",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify({ user: data }),
+      success: (resp) => {
+        store.dispatch({
+          type: 'ADD_USER',
+          user: resp.data,
+        });
+      },
+    });
+  }
 }
 
 export default new TheServer();
