@@ -7,11 +7,12 @@ defmodule TaskTracker.Repo.Migrations.CreateTasks do
       add :description, :text, null: false
       add :completed, :boolean, default: false, null: false
       add :time, :integer, default: 0, null: false
+      add :boss_id, references(:users, on_delete: :nothing)
       add :user_id, references(:users, on_delete: :nothing)
 
       timestamps()
     end
-
+    create index(:tasks, [:boss_id])
     create index(:tasks, [:user_id])
   end
 end
