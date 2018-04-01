@@ -3,13 +3,13 @@ import ReactDOM                                                 from 'react-dom'
 import { BrowserRouter as Router, Route, Redirect }             from 'react-router-dom';
 import { Provider, connect }                                    from 'react-redux';
 import Nav                                                      from './nav'
-import Users                                                    from './users'
-import Newtask                                                  from './newtask'
-import Tasks                                                    from './tasks'
-import TaskInfo                                                 from './taskinfo'
-import Taskedit                                                from './taskedit'
-import Signup                                                   from './signup'
-import Mytasks                                                   from './mytask'
+import Users                                                    from './account/users'
+import Newtask                                                  from './task/newtask'
+import Tasks                                                    from './task/tasks'
+import TaskInfo                                                 from './task/taskinfo'
+import Taskedit                                                from './task/taskedit'
+import Signup                                                   from './account/signup'
+import Mytasks                                                   from './task/mytask'
 
 export default function tasktracker_init(store) {
   ReactDOM.render(
