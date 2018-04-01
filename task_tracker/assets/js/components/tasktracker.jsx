@@ -9,6 +9,7 @@ import Tasks                                                    from './tasks'
 import TaskInfo                                                 from './taskinfo'
 import Taskedit                                                from './taskedit'
 import Signup                                                   from './signup'
+import Mytasks                                                   from './mytask'
 
 export default function tasktracker_init(store) {
   ReactDOM.render(
@@ -40,6 +41,9 @@ let Tasktracker = connect((state) => state)((props) => {
           <Signup />} />
         <Route path="/tasks" exact={true} render={() =>
           <Tasks tasks={props.tasks} />} />
+        <Route path="/mytasks" exact={true} render={() =>
+          <Mytasks tasks={_.filter(props.tasks, (tt) =>
+            tt.user.id == props.token.user_id)} />} />
         <Route path="/newtask" exact={true} render={() =>
           <Newtask />} />
         <Route path="/tasks/:task_id" exact={true} render={({match}) =>

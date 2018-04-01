@@ -62,17 +62,22 @@ function Nav(props) {
       <ul className="nav nav-pills pull-right">
         <li>
           <NavLink to="/users" exact={true} activeClassName="active" className="nav-link">
-            Users
+            All Users
           </NavLink>
         </li>
         <li>
           <NavLink to="/tasks" exact={true} activeClassName="active" className="nav-link">
-            Tasks
+            All Tasks
           </NavLink>
         </li>
         <li>
           <NavLink to="/newtask" exact={true} activeClassName="active" className="nav-link">
             New Task
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/mytasks" exact={true} activeClassName="active" className="nav-link">
+            My Task
           </NavLink>
         </li>
         <li>

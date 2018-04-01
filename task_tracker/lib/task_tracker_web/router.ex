@@ -24,6 +24,7 @@ defmodule TaskTrackerWeb.Router do
     get "/tasks/:id/edit", PageController, :index
     get "/newtask", PageController, :index
     get "/signup", PageController, :index
+    get "/mytasks", PageController, :index
   end
 
   # Other scopes may use custom stacks.
