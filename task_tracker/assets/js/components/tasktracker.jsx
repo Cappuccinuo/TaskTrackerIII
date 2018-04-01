@@ -6,6 +6,7 @@ import Nav                                                      from './nav'
 import Users                                                    from './users'
 import Newtask                                                  from './newtask'
 import Tasks                                                    from './tasks'
+import TaskInfo                                                 from './taskinfo'
 
 export default function tasktracker_init(store) {
   ReactDOM.render(
@@ -17,27 +18,39 @@ export default function tasktracker_init(store) {
 }
 
 let Tasktracker = connect((state) => state)((props) => {
-    return <Router>
+  function filter(tasks, id) {
+    let task = "";
+    _.map(tasks, (tt) => {
+      if (tt.id == id) {
+        task = tt;
+      }
+    })
+    return task;
+  }
+
+  return <Router>
+    <div>
+      <Nav />
       <div>
-        <Nav />
-        <div>
-          <Route path="/users" exact={true} render={() =>
-            <Users users={props.users} />} />
-          <Route path="/tasks" exact={true} render={() =>
-            <Tasks tasks={props.tasks} />} />
-          <Route path="/newtask" exact={true} render={() =>
-            <Newtask />} />
-          <Route path="/" exact={true} render={() =>
-            props.state.token ? (
-              <Redirect to="/"></Redirect>
-            ) : (
-            <div className="jumbotron">
-              <h2>Welcome to Task Tracker</h2>
-              <p className="lead">A simple web application that<br />helps you and your friends follow through tasks efficiently.</p>
-            </div>
-            )
-          } />
-        </div>
+        <Route path="/users" exact={true} render={() =>
+          <Users users={props.users} />} />
+        <Route path="/tasks" exact={true} render={() =>
+          <Tasks tasks={props.tasks} />} />
+        <Route path="/newtask" exact={true} render={() =>
+          <Newtask />} />
+        <Route path="/tasks/:task_id" exact={true} render={({match}) =>
+          <TaskInfo task={filter(props.tasks, match.params.task_id)}/> }/>
+        <Route path="/" exact={true} render={() =>
+          props.state.token ? (
+            <Redirect to="/"></Redirect>
+          ) : (
+          <div className="jumbotron">
+            <h2>Welcome to Task Tracker</h2>
+            <p className="lead">A simple web application that<br />helps you and your friends follow through tasks efficiently.</p>
+          </div>
+          )
+        } />
       </div>
-    </Router>
+    </div>
+  </Router>
 });

@@ -1,4 +1,6 @@
 import React from 'react';
+import { Form, FormGroup, Input, Button } from 'reactstrap';
+import { NavLink, Redirect, Link } from 'react-router-dom';
 
 function Task(params) {
   let completed = params.task.completed ? "completed" : "pending";
@@ -9,6 +11,9 @@ function Task(params) {
       <td>{completed}</td>
       <td>{params.task.time}</td>
       <td>{params.task.user.name}</td>
+      <td><Link to={"/tasks/" + params.task.id}>
+        Detail
+      </Link></td>
     </tr>;
 }
 
@@ -25,6 +30,7 @@ export default function Tasks(params) {
             <th scope="col">Completed</th>
             <th scope="col">Time</th>
             <th scope="col">Worker</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
