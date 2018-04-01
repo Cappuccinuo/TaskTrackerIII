@@ -63,6 +63,21 @@ class TheServer {
     });
   }
 
+  update_task(data, id) {
+    $.ajax("/api/v1/tasks/" + id, {
+      method: "put",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify({ token: data.token, task: data }),
+      success: (resp) => {
+        store.dispatch({
+          type: 'UPDATE_TASK',
+          task: resp.data,
+        });
+      },
+    });
+  }
+
   submit_user(data) {
     $.ajax("/api/v1/users", {
       method: "post",

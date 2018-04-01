@@ -7,6 +7,7 @@ import Users                                                    from './users'
 import Newtask                                                  from './newtask'
 import Tasks                                                    from './tasks'
 import TaskInfo                                                 from './taskinfo'
+import Taskedit                                                from './taskedit'
 import Signup                                                   from './signup'
 
 export default function tasktracker_init(store) {
@@ -43,6 +44,8 @@ let Tasktracker = connect((state) => state)((props) => {
           <Newtask />} />
         <Route path="/tasks/:task_id" exact={true} render={({match}) =>
           <TaskInfo task={filter(props.tasks, match.params.task_id)}/> }/>
+        <Route path="/tasks/:task_id/edit" exact={true} render={({match}) =>
+          <Taskedit task={filter(props.tasks, match.params.task_id)} update_id={match.params.task_id}/> }/>
         <Route path="/" exact={true} render={() =>
           props.state.token ? (
             <Redirect to="/"></Redirect>

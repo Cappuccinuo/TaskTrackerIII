@@ -5,6 +5,8 @@ function tasks(state = [], action) {
   switch (action.type) {
   case 'TASKS_LIST':
     return [...action.tasks];
+  case 'UPDATE_TASK':
+    return [action.task, ...state];
   case 'ADD_TASK':
     return [action.task, ...state];
   default:
@@ -16,7 +18,7 @@ function users(state = [], action) {
   switch (action.type) {
   case 'USERS_LIST':
     return [...action.users];
-  case 'ADD_TASK':
+  case 'ADD_USER':
     return [action.user, ...state];
   default:
     return state;
@@ -26,8 +28,8 @@ function users(state = [], action) {
 let empty_form = {
   title: "",
   description: "",
-  completed: false,
-  time: 0,
+  completed: "0",
+  time: "0",
   user_id: "",
   worker_id: "",
 };
@@ -40,6 +42,20 @@ function form(state = empty_form, action) {
       return empty_form;
     case 'SET_TOKEN':
       return Object.assign({}, state, action.token);
+    default:
+      return state;
+  }
+}
+
+let empty_edit_form = {
+  completed: "0",
+  time: "0",
+}
+
+function update_form(state = empty_edit_form, action) {
+  switch (action.type) {
+    case 'UPDATE_FORM':
+      return Object.assign({}, state, action.data);
     default:
       return state;
   }
@@ -74,7 +90,7 @@ function root_reducer(state0, action) {
   console.log("reducer", action);
   // {posts, users, form} is ES6 shorthand for
   // {posts: posts, users: users, form: form}
-  let reducer = combineReducers({users, tasks, login, token, form});
+  let reducer = combineReducers({users, tasks, login, token, form, update_form});
   let state1 = reducer(state0, action);
   console.log("state1", state1);
   return deepFreeze(state1);

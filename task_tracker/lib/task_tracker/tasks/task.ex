@@ -4,9 +4,9 @@ defmodule TaskTracker.Tasks.Task do
 
 
   schema "tasks" do
-    field :completed, :boolean, default: false
+    field :completed, :string, default: "0", null: false
     field :description, :string, null: false
-    field :time, :integer, default: 0, null: false
+    field :time, :string, default: "0", null: false
     field :title, :string, null: false
     belongs_to :boss, TaskTracker.Users.User
     belongs_to :user, TaskTracker.Users.User
