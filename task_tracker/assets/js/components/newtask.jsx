@@ -56,32 +56,10 @@ function Newtask(props) {
       </div>
       <div className="form-group">
           <label className="form-check-label">
-            Complete
-          </label>
-          <br />
-          <input className="form-check-input" type="checkbox" name="completed"
-            value="" onChange={update}/>
-      </div>
-      <div className="form-group">
-          <label className="form-check-label">
-            Time Spent
-          </label>
-          <input className="form-control" type="number" step="15" min="0"
-            name="time" value={props.form.time} onChange={update}/>
-      </div>
-      <div className="form-group">
-          <label className="form-check-label">
-            My ID
-          </label>
-          <input className="form-control" type="number" min="1"
-            name="user_id" value={props.form.user_id} onChange={update}/>
-      </div>
-      <div className="form-group">
-          <label className="form-check-label">
             Assigned Worker
           </label>
           <input className="form-control" type="number" min="1"
-            name="worker_id" value={props.form.worker_id} onChange={update}/>
+            name="user_id" value={props.form.user_id} onChange={update}/>
       </div>
       <button onClick={submit} className="btn btn-primary">Submit</button>
     </form>
