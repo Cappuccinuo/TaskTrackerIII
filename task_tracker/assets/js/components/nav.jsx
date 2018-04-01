@@ -84,7 +84,7 @@ function Nav(props) {
     </header>;
   }
   else {
-    session_info = <LoginForm />
+    session_info = <Login />
     return <header className="header">
       <nav role="navigation">
         <ul className="nav nav-pills pull-right">

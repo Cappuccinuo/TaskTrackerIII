@@ -1,6 +1,25 @@
 import React from 'react';
+import { Form, FormGroup, Input, Button } from 'reactstrap';
+import { connect } from 'react-redux';
+import api from 'js/api';
+import { NavLink, Redirect, Link } from 'react-router-dom';
 
-export default function Login(props) {
+function Login(props) {
+  function update(ev) {
+    let tgt = $(ev.target);
+    let data = {};
+    data[tgt.attr('name')] = tgt.val();
+    props.dispatch({
+      type: 'UPDATE_LOGIN_FORM',
+      data: data,
+    });
+  }
+
+  function create_token(ev) {
+    api.submit_login(props.login);
+    console.log(props.login);
+  }
+
   return <div className="container-fluid">
     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul className="nav navbar-nav navbar-right">
@@ -13,16 +32,17 @@ export default function Login(props) {
                     Login
                      <form className="form" role="form" method="post" action="login" id="login-nav">
                         <div className="form-group">
-                           <label for="email" className="sr-only">Email address</label>
-                           <input type="email" className="form-control" id="exampleInputEmail2" placeholder="Email address" required/>
+                           <label className="sr-only">Email address</label>
+                           <Input type="text" name="email" placeholder="email"
+                                  value={props.login.email} onChange={update} />
                         </div>
                         <div className="form-group">
-                           <button type="submit" className="btn btn-primary btn-block">Sign in</button>
+                           <Button className="btn btn-primary btn-block" onClick={create_token}>Sign in</Button>
                         </div>
                      </form>
                   </div>
                   <div className="bottom text-center">
-                    New here ? <a href="#"><b>Sign Up</b></a>
+                    New here ? <Link to="/signup">Sign up</Link>
                   </div>
                </div>
             </li>
@@ -32,3 +52,12 @@ export default function Login(props) {
     </div>
   </div>;
 }
+
+function state2props(state) {
+  console.log(state.token);
+  return {
+    login: state.login,
+    token: state.token,
+  };
+}
+export default connect(state2props)(Login);
