@@ -1,11 +1,11 @@
-import React                                          from 'react';
-import ReactDOM                                       from 'react-dom';
-import { BrowserRouter as Router, Route }             from 'react-router-dom';
-import { Provider, connect }                          from 'react-redux';
-import Nav                                            from './nav'
-import Users                                          from './users'
-import Newtask                                        from './newtask'
-import Tasks                                          from './tasks'
+import React                                                    from 'react';
+import ReactDOM                                                 from 'react-dom';
+import { BrowserRouter as Router, Route, Redirect }             from 'react-router-dom';
+import { Provider, connect }                                    from 'react-redux';
+import Nav                                                      from './nav'
+import Users                                                    from './users'
+import Newtask                                                  from './newtask'
+import Tasks                                                    from './tasks'
 
 export default function tasktracker_init(store) {
   ReactDOM.render(
@@ -15,6 +15,7 @@ export default function tasktracker_init(store) {
     document.getElementById('root')
   );
 }
+
 let Tasktracker = connect((state) => state)((props) => {
     return <Router>
       <div>
@@ -27,10 +28,15 @@ let Tasktracker = connect((state) => state)((props) => {
           <Route path="/newtask" exact={true} render={() =>
             <Newtask />} />
           <Route path="/" exact={true} render={() =>
+            props.state.token ? (
+              <Redirect to="/"></Redirect>
+            ) : (
             <div className="jumbotron">
               <h2>Welcome to Task Tracker</h2>
               <p className="lead">A simple web application that<br />helps you and your friends follow through tasks efficiently.</p>
-            </div>} />
+            </div>
+            )
+          } />
         </div>
       </div>
     </Router>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import Login from "./login";
 import api from '../api';
 import { connect } from 'react-redux';
@@ -21,6 +21,7 @@ let LoginForm = connect(({login}) => {return {login};})((props) => {
     console.log(props.login);
   }
 
+
   return <div className="navbar-text">
     <Form inline>
       <FormGroup>
@@ -33,8 +34,16 @@ let LoginForm = connect(({login}) => {return {login};})((props) => {
 });
 
 let Session = connect(({token}) => {return {token};})((props) => {
+  function delete_token(ev) {
+    props.dispatch({
+      type: "DELETE_TOKEN",
+    });
+    console.log(props.login);
+  }
+
   return <div className="navbar-text">
-    User id = { props.token.user_id }
+    User id = { props.token.user_id },
+    <Button onClick={delete_token}>Log out</Button>
   </div>;
 });
 
