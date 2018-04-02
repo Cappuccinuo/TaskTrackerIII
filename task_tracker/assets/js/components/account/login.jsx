@@ -37,6 +37,11 @@ function Login(props) {
                                   value={props.login.email} onChange={update} />
                         </div>
                         <div className="form-group">
+                           <label className="sr-only">Password</label>
+                           <Input type="password" name="password" placeholder="password"
+                                  value={props.login.password} onChange={update} />
+                        </div>
+                        <div className="form-group">
                            <Button className="btn btn-primary btn-block" onClick={create_token}>Sign in</Button>
                         </div>
                      </form>

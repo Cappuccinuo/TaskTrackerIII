@@ -4,10 +4,8 @@ defmodule TaskTrackerWeb.TokenController do
 
   action_fallback TaskTrackerWeb.FallbackController
 
-  def create(conn, %{"email" => email}) do
-    user = TaskTracker.Users.get_and_auth_user(email)
-    if (user) do
-      %User{} = user
+  def create(conn, %{"email" => email, "password" => pass}) do
+    with {:ok, %User{} = user} <- TaskTracker.Users.get_and_auth_user(email, pass) do
       token = Phoenix.Token.sign(conn, "auth token", user.id)
       conn
       |> put_status(:created)

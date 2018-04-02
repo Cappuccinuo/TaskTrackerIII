@@ -89,6 +89,7 @@ function token(state = null, action) {
 
 let empty_login = {
   email: "",
+  password: "",
 };
 
 function login(state = empty_login, action) {
