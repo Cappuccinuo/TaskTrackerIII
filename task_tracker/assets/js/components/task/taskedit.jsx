@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Input } from 'reactstrap';
+import { Form, FormGroup, Input, Button } from 'reactstrap';
 import api from 'js/api';
+import { Link } from 'react-router-dom';
 
 function Taskedit(props) {
   console.log("props@TaskEdit", props);
@@ -51,6 +52,7 @@ function Taskedit(props) {
             name="time" value={props.update_form.time} onChange={update}/>
       </div>
       <button onClick={submit} className="btn btn-primary">Submit</button>
+      <Link to={"/tasks/" + props.update_id} style={{ textDecoration: 'none', color: 'white'}}><Button color="primary">Back</Button></Link>
     </form>
   );
 }

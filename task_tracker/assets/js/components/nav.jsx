@@ -5,34 +5,6 @@ import api from '../api';
 import { connect } from 'react-redux';
 import { Form, FormGroup, Input, Button } from 'reactstrap';
 
-let LoginForm = connect(({login}) => {return {login};})((props) => {
-  function update(ev) {
-    let tgt = $(ev.target);
-    let data = {};
-    data[tgt.attr('name')] = tgt.val();
-    props.dispatch({
-      type: 'UPDATE_LOGIN_FORM',
-      data: data,
-    });
-  }
-
-  function create_token(ev) {
-    api.submit_login(props.login);
-    console.log(props.login);
-  }
-
-  return <div className="navbar-text">
-    <Form inline>
-      <FormGroup>
-        <Input type="text" name="email" placeholder="email"
-               value={props.login.email} onChange={update} />
-      </FormGroup>
-      <Button onClick={create_token}>Log In</Button>
-      <Link to="/signup">Sign up</Link>
-    </Form>
-  </div>;
-});
-
 let Session = connect(({token}) => {return {token};})((props) => {
   function delete_token(ev) {
     props.dispatch({
@@ -72,7 +44,7 @@ function Nav(props) {
           </li>
           <li>
             <NavLink to="/mytasks" exact={true} activeClassName="active" className="nav-link">
-              My Task
+              My Todo Task
             </NavLink>
           </li>
           <li>

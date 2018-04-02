@@ -20,6 +20,7 @@ defmodule TaskTracker.Tasks do
   def list_tasks do
     Repo.all(Task)
     |> Repo.preload(:user)
+    |> Repo.preload(:boss)
   end
 
   @doc """
@@ -39,6 +40,7 @@ defmodule TaskTracker.Tasks do
   def get_task!(id) do
      Repo.get!(Task, id)
      |> Repo.preload(:user)
+     |> Repo.preload(:boss)
   end
   @doc """
   Creates a task.
@@ -53,9 +55,10 @@ defmodule TaskTracker.Tasks do
 
   """
   def create_task(attrs \\ %{}) do
-    %Task{}
+    {:ok, task} = %Task{}
     |> Task.changeset(attrs)
     |> Repo.insert()
+    {:ok, Repo.preload(task, :user) |> Repo.preload(:boss)}
   end
 
   @doc """
@@ -71,9 +74,12 @@ defmodule TaskTracker.Tasks do
 
   """
   def update_task(%Task{} = task, attrs) do
-    task
+    {:ok, task} = task
     |> Task.changeset(attrs)
     |> Repo.update()
+    task_id = Map.get(task, :id)
+    newTask = get_task!(task_id)
+    {:ok, Repo.preload(newTask, :user) |> Repo.preload(:boss)}
   end
 
   @doc """

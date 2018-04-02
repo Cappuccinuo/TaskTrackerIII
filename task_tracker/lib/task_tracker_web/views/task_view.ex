@@ -17,7 +17,8 @@ defmodule TaskTrackerWeb.TaskView do
       description: task.description,
       completed: task.completed,
       time: task.time,
-      user: render_one(task.user, UserView, "user.json")
+      user: render_one(task.user, UserView, "user.json"),
+      boss: render_one(task.boss, UserView, "user.json")
     }
   end
 end

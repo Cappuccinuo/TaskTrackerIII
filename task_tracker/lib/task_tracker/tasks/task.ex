@@ -18,8 +18,6 @@ defmodule TaskTracker.Tasks.Task do
   def changeset(task, attrs) do
     task
     |> cast(attrs, [:title, :description, :completed, :time, :user_id, :boss_id])
-    |> foreign_key_constraint(:user_id)
-    |> foreign_key_constraint(:boss_id)
     |> validate_required([:title, :description, :completed, :time, :user_id, :boss_id])
   end
 end

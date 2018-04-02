@@ -7,6 +7,7 @@ class TheServer {
       dataType: "json",
       contentType: "application/json; charset=UTF-8",
       success: (resp) => {
+        console.log(resp.data);
         store.dispatch({
           type: 'TASKS_LIST',
           tasks: resp.data,

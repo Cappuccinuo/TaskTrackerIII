@@ -15,13 +15,14 @@ defmodule Seeds do
   alias TaskTracker.Tasks.Task
 
   def run do
+    Repo.delete_all(Task)
     Repo.delete_all(User)
     a = Repo.insert!(%User{ email: "alice@example.com", name: "alice" })
     b = Repo.insert!(%User{ email: "bob@example.com", name: "bob" })
     c = Repo.insert!(%User{ email: "carol@example.com", name: "carol" })
     d = Repo.insert!(%User{ email: "dave@example.com", name: "dave" })
 
-    Repo.delete_all(Task)
+
     Repo.insert!(%Task{ title: "test1", description: "Hi", completed: "0", time: "0", user_id: b.id, boss_id: a.id })
     Repo.insert!(%Task{ title: "test2", description: "Hello", completed: "1", time: "145", user_id: c.id, boss_id: b.id })
     Repo.insert!(%Task{ title: "test3", description: "Hey", completed: "0", time: "0", user_id: d.id, boss_id: c.id })

@@ -31,7 +31,7 @@ let empty_form = {
   completed: "0",
   time: "0",
   user_id: "",
-  worker_id: "",
+  boss_id: "",
 };
 
 function form(state = empty_form, action) {
