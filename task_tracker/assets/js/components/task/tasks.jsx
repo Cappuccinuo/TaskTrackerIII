@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, FormGroup, Input, Button } from 'reactstrap';
 import { NavLink, Redirect, Link } from 'react-router-dom';
+import api from 'js/api';
 
 function Task(params) {
   let completed = params.task.completed == "1" ? "completed" : "pending";
@@ -16,7 +17,11 @@ function Task(params) {
 }
 
 function TaskSpecific(params) {
-  let completed = params.task.completed == "1" ? "completed" : "pending";
+  let completed = (params.task.completed == "1") ? "completed" : "pending";
+
+  function del(ev) {
+    api.delete_task(params.task.id);
+  }
 
   return <tr>
       <td>{params.task.title}</td>
@@ -24,6 +29,8 @@ function TaskSpecific(params) {
       <td>{completed}</td>
       <td>{params.task.time}</td>
       <td>{params.task.user.name}</td>
+      <td><button onClick={del} className="btn btn-primary">Delete</button></td>
+      <td><Link to={"/tasks/" + params.task.id + "/modify"} style={{ textDecoration: 'none', color: 'white'}}><Button color="primary">Modify</Button></Link></td>
     </tr>;
 }
 
@@ -59,6 +66,8 @@ export default function Tasks(params) {
             <th scope="col">Completed</th>
             <th scope="col">Time</th>
             <th scope="col">Worker</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>

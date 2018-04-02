@@ -22,6 +22,7 @@ defmodule TaskTrackerWeb.Router do
     get "/tasks", PageController, :index
     get "/tasks/:id", PageController, :index
     get "/tasks/:id/edit", PageController, :index
+    get "/tasks/:id/modify", PageController, :index
     get "/newtask", PageController, :index
     get "/signup", PageController, :index
     get "/mytasks", PageController, :index
