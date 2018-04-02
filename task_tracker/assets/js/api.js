@@ -7,7 +7,6 @@ class TheServer {
       dataType: "json",
       contentType: "application/json; charset=UTF-8",
       success: (resp) => {
-        console.log(resp.data);
         store.dispatch({
           type: 'TASKS_LIST',
           tasks: resp.data,
@@ -31,7 +30,6 @@ class TheServer {
   }
 
   submit_login(data) {
-    console.log(data);
     $.ajax("/api/v1/token", {
       method: "post",
       dataType: "json",

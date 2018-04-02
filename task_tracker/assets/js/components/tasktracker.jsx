@@ -12,61 +12,76 @@ import Taskmodify                                               from './task/tas
 import Signup                                                   from './account/signup'
 import Mytasks                                                  from './task/mytask'
 import Myassigned                                               from './task/myassigned'
+import { CookiesProvider, withCookies, Cookies, cookie }        from 'react-cookie';
 
 export default function tasktracker_init(store) {
   ReactDOM.render(
     <Provider store={store}>
-      <Tasktracker state={store.getState()} />
+      <CookiesProvider>
+        <Tasktracker state={store.getState()} />
+      </CookiesProvider>
     </Provider>,
     document.getElementById('root')
   );
 }
 
-let Tasktracker = connect((state) => state)((props) => {
-  function filter(tasks, id) {
-    let task = "";
-    _.map(tasks, (tt) => {
-      if (tt.id == id) {
-        task = tt;
-      }
-    })
-    return task;
+function filter(tasks, id) {
+  let task = "";
+  _.map(tasks, (tt) => {
+    if (tt.id == id) {
+      task = tt;
+    }
+  })
+  return task;
+}
+
+class TaskTracker extends React.Component {
+  componentWillMount() {
+    let token = this.props.cookies.get('token');
+    this.props.dispatch({
+      type: "SET_TOKEN",
+      token: token
+    });
   }
 
-  return <Router>
-    <div>
-      <Nav />
+  render() {
+    return <Router>
       <div>
-        <Route path="/users" exact={true} render={() =>
-          <Users users={props.users} />} />
-        <Route path="/signup" exact={true} render={() =>
-          <Signup />} />
-        <Route path="/tasks" exact={true} render={() =>
-          <Tasks tasks={props.tasks} user_id={props.token.user_id}/>} />
-        <Route path="/mytasks" exact={true} render={() =>
-          <Mytasks tasks={_.filter(props.tasks, (tt) =>
-            tt.user.id == props.token.user_id)} />} />
-        <Route path="/myassigned" exact={true} render={() =>
-          <Myassigned tasks={props.tasks} user_id={props.token.user_id} />} />
-        <Route path="/newtask" exact={true} render={() =>
-          <Newtask />} />
-        <Route path="/tasks/:task_id" exact={true} render={({match}) =>
-          <TaskInfo task={filter(props.tasks, match.params.task_id)}/> }/>
-        <Route path="/tasks/:task_id/edit" exact={true} render={({match}) =>
-          <Taskedit task={filter(props.tasks, match.params.task_id)} update_id={match.params.task_id}/> }/>
-        <Route path="/tasks/:task_id/modify" exact={true} render={({match}) =>
-          <Taskmodify task={filter(props.tasks, match.params.task_id)} modify_id={match.params.task_id}/> }/>
-        <Route path="/" exact={true} render={() =>
-          props.state.token ? (
-            <Redirect to="/"></Redirect>
-          ) : (
-          <div className="jumbotron">
-            <h2>Welcome to Task Tracker</h2>
-            <p className="lead">A simple web application that<br />helps you and your friends follow through tasks efficiently.</p>
-          </div>
-          )
-        } />
+        <Nav />
+        <div>
+          <Route path="/users" exact={true} render={() =>
+            <Users users={this.props.users} />} />
+          <Route path="/signup" exact={true} render={() =>
+            <Signup />} />
+          <Route path="/tasks" exact={true} render={() =>
+            <Tasks tasks={this.props.tasks} user_id={this.props.token.user_id}/>} />
+          <Route path="/mytasks" exact={true} render={() =>
+            <Mytasks tasks={_.filter(this.props.tasks, (tt) =>
+              tt.user.id == this.props.token.user_id)} />} />
+          <Route path="/myassigned" exact={true} render={() =>
+            <Myassigned tasks={this.props.tasks} user_id={this.props.token.user_id} />} />
+          <Route path="/newtask" exact={true} render={() =>
+            <Newtask />} />
+          <Route path="/tasks/:task_id" exact={true} render={({match}) =>
+            <TaskInfo task={filter(this.props.tasks, match.params.task_id)}/> }/>
+          <Route path="/tasks/:task_id/edit" exact={true} render={({match}) =>
+            <Taskedit task={filter(this.props.tasks, match.params.task_id)} update_id={match.params.task_id}/> }/>
+          <Route path="/tasks/:task_id/modify" exact={true} render={({match}) =>
+            <Taskmodify task={filter(this.props.tasks, match.params.task_id)} modify_id={match.params.task_id}/> }/>
+          <Route path="/" exact={true} render={() =>
+            this.props.state.token ? (
+              <Redirect to="/"></Redirect>
+            ) : (
+            <div className="jumbotron">
+              <h2>Welcome to Task Tracker</h2>
+              <p className="lead">A simple web application that<br />helps you and your friends follow through tasks efficiently.</p>
+            </div>
+            )
+          } />
+        </div>
       </div>
-    </div>
-  </Router>
-});
+    </Router>
+  }
+};
+
+let Tasktracker = withCookies(connect((state) => state)(TaskTracker));

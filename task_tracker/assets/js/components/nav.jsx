@@ -4,6 +4,7 @@ import Login from "./account/login";
 import api from '../api';
 import { connect } from 'react-redux';
 import { Form, FormGroup, Input, Button } from 'reactstrap';
+import { CookiesProvider } from 'react-cookie';
 
 let Session = connect(({token, users}) => {return {token, users};})((props) => {
   function delete_token(ev) {
@@ -22,72 +23,47 @@ let Session = connect(({token, users}) => {return {token, users};})((props) => {
 });
 
 function Nav(props) {
-  let session_info;
-
-  if (props.token) {
-    session_info = <Session token={props.token} />;
-    return <header className="header">
-      <nav role="navigation">
-        <ul className="nav nav-pills pull-right">
-          <li>
-            <NavLink to="/" exact={true} activeClassName="active" className="nav-link">
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/users" exact={false} activeClassName="active" className="nav-link">
-              All Users
-            </NavLink>
-          </li>
-          <li>
-            <div className="dropdown">
-              <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Tasks
-              </button>
-              <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <NavLink to="/tasks" exact={true} activeClassName="active" className="nav-link">
-                  All Tasks
-                </NavLink>
-                <NavLink to="/newtask" exact={true} activeClassName="active" className="nav-link">
-                  New Task
-                </NavLink>
-                <NavLink to="/mytasks" exact={true} activeClassName="active" className="nav-link">
-                  My Todo Task
-                </NavLink>
-                <NavLink to="/myassigned" exact={true} activeClassName="active" className="nav-link">
-                  My Assigned Task
-                </NavLink>
-              </div>
+  return <header className="header">
+    <nav role="navigation">
+      <ul className="nav nav-pills pull-right">
+        <li>
+          <NavLink to="/" exact={true} activeClassName="active" className="nav-link">
+            Home
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/users" exact={false} activeClassName="active" className="nav-link">
+            All Users
+          </NavLink>
+        </li>
+        <li>
+          <div className="dropdown">
+            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Tasks
+            </button>
+            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <NavLink to="/tasks" exact={true} activeClassName="active" className="nav-link">
+                All Tasks
+              </NavLink>
+              <NavLink to="/newtask" exact={true} activeClassName="active" className="nav-link">
+                New Task
+              </NavLink>
+              <NavLink to="/mytasks" exact={true} activeClassName="active" className="nav-link">
+                My Todo Task
+              </NavLink>
+              <NavLink to="/myassigned" exact={true} activeClassName="active" className="nav-link">
+                My Assigned Task
+              </NavLink>
             </div>
-          </li>
-          <li>
-            <NavLink to="/myassigned" exact={true} activeClassName="active" className="nav-link">
-              My Assigned Task
-            </NavLink>
-          </li>
-          <li>
-            { session_info }
-          </li>
-        </ul>
-      </nav>
-      <span className="logo"></span>
-    </header>;
-  }
-  else {
-    session_info = <Login />
-    return <header className="header">
-      <nav role="navigation">
-        <ul className="nav nav-pills pull-right">
-          <li>
-            { session_info }
-          </li>
-        </ul>
-      </nav>
-      <span className="logo"></span>
-    </header>;
-  }
-
-
+          </div>
+        </li>
+        <li>
+          <Login users={props.users}/>
+        </li>
+      </ul>
+    </nav>
+    <span className="logo"></span>
+  </header>;
 }
 
 function state2props(state) {

@@ -68,7 +68,6 @@ function update_form(state = empty_edit_form, action) {
 function modify_form(state = empty_form, action) {
   switch (action.type) {
     case 'MODIFY_FORM':
-      console.log(state);
       return Object.assign({}, state, action.data);
     default:
       return state;
@@ -79,7 +78,7 @@ function modify_form(state = empty_form, action) {
 function token(state = null, action) {
   switch (action.type) {
     case 'SET_TOKEN':
-      return action.token;
+      return action.token ? action.token : state;
     case 'DELETE_TOKEN':
       return null;
     default:

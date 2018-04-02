@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { Form, FormGroup, Input, Button } from 'reactstrap';
 
 export default function TaskInfo(props) {
-  console.log(task);
   let task = props.task;
   return (
     <div>

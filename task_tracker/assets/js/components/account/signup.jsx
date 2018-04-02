@@ -20,7 +20,6 @@ function Signup(props) {
 
   function submit(ev) {
     api.submit_user(props.signup);
-    console.log(props.signup);
   }
 
   function clear(ev) {
