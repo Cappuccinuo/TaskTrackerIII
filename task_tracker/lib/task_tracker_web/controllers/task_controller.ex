@@ -11,7 +11,7 @@ defmodule TaskTrackerWeb.TaskController do
     render(conn, "index.json", tasks: tasks)
   end
 
-  def create(conn, %{"task" => task_params}) do
+  def create(conn, %{"task" => task_params, "token" => token}) do
     with {:ok, %Task{} = task} <- Tasks.create_task(task_params) do
       conn
       |> put_status(:created)

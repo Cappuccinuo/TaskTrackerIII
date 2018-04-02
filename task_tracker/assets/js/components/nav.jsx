@@ -5,16 +5,18 @@ import api from '../api';
 import { connect } from 'react-redux';
 import { Form, FormGroup, Input, Button } from 'reactstrap';
 
-let Session = connect(({token}) => {return {token};})((props) => {
+let Session = connect(({token, users}) => {return {token, users};})((props) => {
   function delete_token(ev) {
     props.dispatch({
       type: "DELETE_TOKEN",
     });
-    console.log(props.login);
   }
 
+  let user = _.filter(props.users, (uu) => props.token.user_id == uu.id);
+  let user_name = user[0].name;
+
   return <div className="navbar-text">
-    User id = { props.token.user_id },
+    <span>Welcome back, { user_name }</span>
     <Button onClick={delete_token}>Log out</Button>
   </div>;
 });
@@ -28,23 +30,39 @@ function Nav(props) {
       <nav role="navigation">
         <ul className="nav nav-pills pull-right">
           <li>
-            <NavLink to="/users" exact={true} activeClassName="active" className="nav-link">
+            <NavLink to="/" exact={true} activeClassName="active" className="nav-link">
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/users" exact={false} activeClassName="active" className="nav-link">
               All Users
             </NavLink>
           </li>
           <li>
-            <NavLink to="/tasks" exact={true} activeClassName="active" className="nav-link">
-              All Tasks
-            </NavLink>
+            <div className="dropdown">
+              <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Tasks
+              </button>
+              <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <NavLink to="/tasks" exact={true} activeClassName="active" className="nav-link">
+                  All Tasks
+                </NavLink>
+                <NavLink to="/newtask" exact={true} activeClassName="active" className="nav-link">
+                  New Task
+                </NavLink>
+                <NavLink to="/mytasks" exact={true} activeClassName="active" className="nav-link">
+                  My Todo Task
+                </NavLink>
+                <NavLink to="/myassigned" exact={true} activeClassName="active" className="nav-link">
+                  My Assigned Task
+                </NavLink>
+              </div>
+            </div>
           </li>
           <li>
-            <NavLink to="/newtask" exact={true} activeClassName="active" className="nav-link">
-              New Task
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/mytasks" exact={true} activeClassName="active" className="nav-link">
-              My Todo Task
+            <NavLink to="/myassigned" exact={true} activeClassName="active" className="nav-link">
+              My Assigned Task
             </NavLink>
           </li>
           <li>
@@ -76,6 +94,7 @@ function state2props(state) {
   console.log(state.token);
   return {
     token: state.token,
+    users: state.users,
   };
 }
 export default connect(state2props)(Nav);

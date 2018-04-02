@@ -13,7 +13,7 @@ export default function Users(params) {
   let users = _.map(params.users, (uu) => <User key={uu.id} user={uu} />);
   return <div>
     <h2>All Users</h2>
-    <table className="table table-bordered table-dark">
+    <table className="table table-bordered">
       <thead>
         <tr>
           <th scope="col">Id</th>

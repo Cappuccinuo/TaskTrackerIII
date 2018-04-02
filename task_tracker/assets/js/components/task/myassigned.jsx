@@ -2,8 +2,12 @@ import React from 'react';
 import { Form, FormGroup, Input, Button } from 'reactstrap';
 import { NavLink, Redirect, Link } from 'react-router-dom';
 
-function Task(params) {
-  let completed = params.task.completed == "1" ? "completed" : "pending";
+function TaskSpecific(params) {
+  let completed = (params.task.completed == "1") ? "completed" : "pending";
+
+  function del(ev) {
+    api.delete_task(params.task.id);
+  }
 
   return <tr>
       <td>{params.task.title}</td>
@@ -11,17 +15,17 @@ function Task(params) {
       <td>{completed}</td>
       <td>{params.task.time}</td>
       <td>{params.task.user.name}</td>
-      <td><Link to={"/tasks/" + params.task.id}>
-        Detail
-      </Link></td>
+      <td><button onClick={del} className="btn btn-primary">Delete</button></td>
+      <td><Link to={"/tasks/" + params.task.id + "/modify"} style={{ textDecoration: 'none', color: 'white'}}><Button color="primary">Modify</Button></Link></td>
     </tr>;
 }
 
-export default function Mytasks(params) {
-  let tasks = _.map(params.tasks, (tt) => <Task key={tt.id} task={tt} />);
+export default function Myassigned(params) {
+  let my_assigned_tasks = _.filter(params.tasks, (tt) => params.user_id == tt.boss.id);
+  let show_assigned_tasks = _.map(my_assigned_tasks, (tt) => <TaskSpecific key={tt.id} task={tt}/>);
   return (
     <div>
-      <h2>My Tasks</h2>
+      <h2>My Assigned Tasks</h2>
       <table className="table table-bordered">
         <thead>
           <tr>
@@ -31,10 +35,11 @@ export default function Mytasks(params) {
             <th scope="col">Time</th>
             <th scope="col">Worker</th>
             <th scope="col"></th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
-          {tasks}
+          {show_assigned_tasks}
         </tbody>
       </table>
     </div>

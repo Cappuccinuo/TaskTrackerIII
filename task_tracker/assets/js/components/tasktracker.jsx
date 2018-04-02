@@ -11,6 +11,7 @@ import Taskedit                                                 from './task/tas
 import Taskmodify                                               from './task/taskmodify'
 import Signup                                                   from './account/signup'
 import Mytasks                                                  from './task/mytask'
+import Myassigned                                               from './task/myassigned'
 
 export default function tasktracker_init(store) {
   ReactDOM.render(
@@ -45,6 +46,8 @@ let Tasktracker = connect((state) => state)((props) => {
         <Route path="/mytasks" exact={true} render={() =>
           <Mytasks tasks={_.filter(props.tasks, (tt) =>
             tt.user.id == props.token.user_id)} />} />
+        <Route path="/myassigned" exact={true} render={() =>
+          <Myassigned tasks={props.tasks} user_id={props.token.user_id} />} />
         <Route path="/newtask" exact={true} render={() =>
           <Newtask />} />
         <Route path="/tasks/:task_id" exact={true} render={({match}) =>

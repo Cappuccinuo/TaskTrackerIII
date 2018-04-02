@@ -11,7 +11,7 @@ function Signup(props) {
     let data = {};
     data[tgt.attr('name')] = tgt.val();
     let action = {
-      type: 'UPDATE_FORM',
+      type: 'UPDATE_SIGNUP_FORM',
       data: data,
     };
     console.log(action);
@@ -19,8 +19,8 @@ function Signup(props) {
   }
 
   function submit(ev) {
-    api.submit_user(props.form);
-    console.log(props.form);
+    api.submit_user(props.signup);
+    console.log(props.signup);
   }
 
   function clear(ev) {
@@ -35,15 +35,21 @@ function Signup(props) {
       <div className="form-group">
         <label>Name</label>
         <input className="form-control" name="name"
-          value={props.form.name} onChange={update}/>
+          value={props.signup.name} onChange={update}/>
       </div>
       <div className="form-group">
         <label>Email</label>
-        <textarea className="form-control"
-          name="email" value={props.form.email}
-          onChange={update}></textarea>
+        <input className="form-control"
+          name="email" value={props.signup.email}
+          onChange={update} />
+      </div>
+      <div className="form-group">
+         <label>Password</label>
+         <Input type="password" name="password" placeholder="password"
+                value={props.signup.password} onChange={update} />
       </div>
       <button onClick={submit} className="btn btn-primary">Sign up</button>
+      <button onClick={clear} className="btn btn-primary">Reset</button>
     </form>
   );
 }
@@ -52,7 +58,7 @@ function Signup(props) {
 function state2props(state) {
   console.log("props@SignupForm", state);
   return {
-    form: state.form,
+    signup: state.signup,
   };
 }
 

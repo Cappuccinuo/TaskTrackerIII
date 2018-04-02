@@ -101,11 +101,28 @@ function login(state = empty_login, action) {
   }
 }
 
+let empty_signup_form = {
+  email: "",
+  name: "",
+  password: "",
+};
+
+function signup(state = empty_signup_form, action) {
+  switch (action.type) {
+    case 'UPDATE_SIGNUP_FORM':
+      return Object.assign({}, state, action.data);
+    case 'CLEAR_SIGNUP_FORM':
+      return empty_signup_form;
+    default:
+      return state;
+  }
+}
+
 function root_reducer(state0, action) {
   console.log("reducer", action);
   // {posts, users, form} is ES6 shorthand for
   // {posts: posts, users: users, form: form}
-  let reducer = combineReducers({users, tasks, login, token, form, update_form, modify_form});
+  let reducer = combineReducers({users, tasks, login, token, form, update_form, modify_form, signup});
   let state1 = reducer(state0, action);
   console.log("state1", state1);
   return deepFreeze(state1);

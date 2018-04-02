@@ -24,12 +24,11 @@ function Login(props) {
     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul className="nav navbar-nav navbar-right">
         <li className="dropdown">
-          <a href="#" className="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span className="caret"></span></a>
+          <a href="#" className="dropdown-toggle" data-toggle="dropdown"><b>Login</b> </a>
             <ul id="login-dp" className="dropdown-menu">
             <li>
                <div className="row">
                   <div className="col-md-12">
-                    Login
                      <form className="form" role="form" method="post" action="login" id="login-nav">
                         <div className="form-group">
                            <label className="sr-only">Email address</label>
