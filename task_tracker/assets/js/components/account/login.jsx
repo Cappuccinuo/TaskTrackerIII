@@ -8,6 +8,9 @@ import { withCookies, Cookies } from 'react-cookie';
 class Login extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      redirect: false
+    }
     this.update = this.update.bind(this);
     this.create_token = this.create_token.bind(this);
     this.delete_token = this.delete_token.bind(this);
@@ -36,11 +39,23 @@ class Login extends React.Component {
 
   create_token(ev) {
     api.submit_login(this.props.login);
+    console.log("login", this.props);
+    swal({
+      title: "Log in Success!",
+      text: "Welcome back " + this.props.login.email,
+      icon: "success",
+    });
   }
 
   delete_token(ev) {
     this.props.dispatch({
       type: "DELETE_TOKEN",
+    });
+    this.setState({ redirect: true });
+    swal({
+      title: "Log out Success!",
+      text: "Have a good one!",
+      icon: "success",
     });
   }
 
@@ -55,6 +70,8 @@ class Login extends React.Component {
   }
 
   render() {
+    const { from } = '/';
+    const { redirect } = this.state;
     if (this.props.token) {
       let user_name = this.get_current_user_name(this.props.users, this.props.token.user_id);
 
@@ -97,6 +114,9 @@ class Login extends React.Component {
             </li>
           </ul>
         </div>
+        {redirect && (
+          <Redirect to={from || '/'}/>
+        )}
       </div>;
     }
   }
