@@ -53,14 +53,13 @@ class Login extends React.Component {
     });
     swal({
       title: "Log out Success!",
-      text: "Have a good one!",
+      text: "Please wait for me to refresh, and Have a good one!",
       icon: "success",
     });
     this.setState({redirect: true});
     setTimeout(function(){
-        console.log("THIS IS");
         location.reload();
-    }, 2000);
+    }, 2500);
   }
 
   get_current_user_name(users, user_id) {
