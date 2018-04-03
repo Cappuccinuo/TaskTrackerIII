@@ -6,7 +6,6 @@ import Nav                                                      from './nav'
 import Users                                                    from './account/users'
 import Newtask                                                  from './task/newtask'
 import Tasks                                                    from './task/tasks'
-import TaskInfo                                                 from './task/taskinfo'
 import Taskedit                                                 from './task/taskedit'
 import Taskmodify                                               from './task/taskmodify'
 import Signup                                                   from './account/signup'
@@ -84,17 +83,10 @@ class TaskTracker extends React.Component {
 
           <Route path="/newtask" exact={true} render={() =>
              isLoggedIn ? (
-               <Newtask />
+               <Newtask boss_id={this.props.token.user_id}/>
              ) : (
                <Redirect to="/"></Redirect>
              )} />
-
-          <Route path="/tasks/:task_id" exact={true} render={({match}) =>
-             isLoggedIn ? (
-               <TaskInfo task={filter(this.props.tasks, match.params.task_id)}/>
-             ) : (
-               <Redirect to="/"></Redirect>
-             )}/>
 
           <Route path="/tasks/:task_id/edit" exact={true} render={({match}) =>
              isLoggedIn ? (

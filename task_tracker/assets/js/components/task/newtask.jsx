@@ -9,6 +9,7 @@ function Newtask(props) {
   function update(ev) {
     let tgt = $(ev.target);
     let data = {};
+    data["boss_id"] = props.boss_id;
     if (tgt.attr('name') == "completed") {
       if ($(tgt).is(':checked')) {
         tgt.attr('value', 'true');
@@ -41,6 +42,7 @@ function Newtask(props) {
     });
   }
   let users = _.map(props.users, (uu) => <option key={uu.id} value={uu.id}>{uu.name}</option>);
+  let meUser = _.filter(props.users, (uu) => props.boss_id == uu.id);
   return (
     <form>
       <h2>New Task</h2>
@@ -49,22 +51,14 @@ function Newtask(props) {
         <input className="form-control" name="title"
           value={props.form.title} onChange={update}/>
       </div>
+      
       <div className="form-group">
         <label>Description</label>
         <textarea className="form-control"
           name="description" value={props.form.description}
           rows="3" onChange={update}></textarea>
       </div>
-      <div className="form-group">
-          <label className="form-check-label">
-            Boss
-          </label>
-          <Input className="form-control" type="select"
-            name="boss_id" value={props.form.boss_id} onChange={update}>
-            <option></option>
-            {users}
-          </Input>
-      </div>
+
       <div className="form-group">
           <label className="form-check-label">
             Assigned Worker

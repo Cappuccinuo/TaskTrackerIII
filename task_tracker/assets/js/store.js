@@ -65,7 +65,14 @@ function update_form(state = empty_edit_form, action) {
   }
 }
 
-function modify_form(state = empty_form, action) {
+let empty_modify_form = {
+  title: "",
+  description: "",
+  user_id: "",
+}
+
+
+function modify_form(state = empty_modify_form, action) {
   switch (action.type) {
     case 'MODIFY_FORM':
       return Object.assign({}, state, action.data);
@@ -73,7 +80,6 @@ function modify_form(state = empty_form, action) {
       return state;
   }
 }
-
 
 function token(state = null, action) {
   switch (action.type) {

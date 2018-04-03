@@ -40,16 +40,7 @@ function Taskmodify(props) {
           name="description" value={props.modify_form.description}
           rows="3" onChange={modify}></textarea>
       </div>
-      <div className="form-group">
-          <label className="form-check-label">
-            Boss
-          </label>
-          <Input className="form-control" type="select"
-            name="boss_id" value={props.modify_form.boss_id} onChange={modify}>
-            <option></option>
-            {users}
-          </Input>
-      </div>
+
       <div className="form-group">
           <label className="form-check-label">
             Assigned Worker
@@ -61,6 +52,9 @@ function Taskmodify(props) {
           </Input>
       </div>
       <button onClick={submit} className="btn btn-primary">Submit</button>
+      <span>
+        <Link to={"/myassigned/"} style={{ textDecoration: 'none', color: 'white'}}><Button color="primary">Back</Button></Link>
+      </span>
     </form>
   );
 }

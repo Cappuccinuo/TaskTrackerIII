@@ -34,26 +34,35 @@ function Taskedit(props) {
     console.log(props.update_id);
   }
 
+  let task = props.task;
   return (
-    <form>
-      <div className="form-group">
-          <label className="form-check-label">
-            Complete
-          </label>
-          <br />
-          <input className="form-check-input" type="checkbox" name="completed"
-            value={props.update_form.completed} onChange={update}/>
+    <div>
+      <div>
+        <h3>Title</h3>
+        <p>{task.title}</p>
+        <h3>Description</h3>
+        <p>{task.description}</p>
       </div>
-      <div className="form-group">
-          <label className="form-check-label">
-            Time Spent
-          </label>
-          <input className="form-control" type="number" step="15" min="0"
-            name="time" value={props.update_form.time} onChange={update}/>
-      </div>
-      <button onClick={submit} className="btn btn-primary">Submit</button>
-      <Link to={"/tasks/" + props.update_id} style={{ textDecoration: 'none', color: 'white'}}><Button color="primary">Back</Button></Link>
-    </form>
+      <form>
+        <div className="form-group">
+            <label className="form-check-label">
+              Complete
+            </label>
+            <br />
+            <input className="form-check-input" type="checkbox" name="completed"
+              value={props.update_form.completed} onChange={update}/>
+        </div>
+        <div className="form-group">
+            <label className="form-check-label">
+              Time Spent
+            </label>
+            <input className="form-control" type="number" step="15" min="0"
+              name="time" value={props.update_form.time} onChange={update}/>
+        </div>
+        <button onClick={submit} className="btn btn-primary">Submit</button>
+        <Link to={"/tasks/" + props.update_id} style={{ textDecoration: 'none', color: 'white'}}><Button color="primary">Back</Button></Link>
+      </form>
+    </div>
   );
 }
 

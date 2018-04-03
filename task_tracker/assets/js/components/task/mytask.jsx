@@ -11,9 +11,7 @@ function Task(params) {
       <td>{completed}</td>
       <td>{params.task.time}</td>
       <td>{params.task.user.name}</td>
-      <td><Link to={"/tasks/" + params.task.id}>
-        Detail
-      </Link></td>
+      <td><Link to={"/tasks/" + params.task.id + "/edit"} style={{ textDecoration: 'none', color: 'white'}}><Button color="primary">Edit</Button></Link></td>
     </tr>;
 }
 
