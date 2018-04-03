@@ -41,7 +41,7 @@ function Newtask(props) {
       type: 'CLEAR_FORM',
     });
   }
-  let users = _.map(props.users, (uu) => <option key={uu.id} value={uu.id}>{uu.name}</option>);
+  let users = _.map(props.users, (uu) => <option key={uu.id} value={uu.id}>{uu.name}({uu.email})</option>);
   let meUser = _.filter(props.users, (uu) => props.boss_id == uu.id);
   return (
     <form>
@@ -49,14 +49,14 @@ function Newtask(props) {
       <div className="form-group">
         <label>Title</label>
         <input className="form-control" name="title"
-          value={props.form.title} onChange={update}/>
+          value={props.form.title} onChange={update} required/>
       </div>
-      
+
       <div className="form-group">
         <label>Description</label>
         <textarea className="form-control"
           name="description" value={props.form.description}
-          rows="3" onChange={update}></textarea>
+          rows="3" onChange={update} required></textarea>
       </div>
 
       <div className="form-group">
@@ -64,7 +64,7 @@ function Newtask(props) {
             Assigned Worker
           </label>
           <Input className="form-control" type="select"
-            name="user_id" value={props.form.user_id} onChange={update}>
+            name="user_id" value={props.form.user_id} onChange={update} required>
             <option></option>
             {users}
           </Input>

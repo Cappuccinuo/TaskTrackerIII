@@ -41,13 +41,13 @@ function Taskmodify(props) {
       <div className="form-group">
         <label><h3>New Title</h3></label>
         <input className="form-control" name="title"
-          value={props.modify_form.title} onChange={modify}/>
+          value={props.modify_form.title} onChange={modify} required/>
       </div>
       <div className="form-group">
         <label><h3>New Description</h3></label>
         <textarea className="form-control"
           name="description" value={props.modify_form.description}
-          rows="3" onChange={modify}></textarea>
+          rows="3" onChange={modify} required></textarea>
       </div>
 
       <div className="form-group">
@@ -55,7 +55,7 @@ function Taskmodify(props) {
             <h3>New Assigned Worker</h3>
           </label>
           <Input className="form-control" type="select"
-            name="user_id" value={props.modify_form.user_id} onChange={modify}>
+            name="user_id" value={props.modify_form.user_id} onChange={modify} required>
             <option></option>
             {users}
           </Input>
