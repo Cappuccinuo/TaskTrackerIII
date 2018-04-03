@@ -48,7 +48,7 @@ function Nav(props) {
         </li>
         <li>
           <CookiesProvider>
-            <Login />
+            <Login/>
           </CookiesProvider>
         </li>
       </ul>
@@ -61,7 +61,6 @@ function state2props(state) {
   console.log(state.token);
   return {
     token: state.token,
-    users: state.users,
   };
 }
 export default connect(state2props)(Nav);

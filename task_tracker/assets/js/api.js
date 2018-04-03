@@ -29,6 +29,20 @@ class TheServer {
     });
   }
 
+  request_user(id) {
+    $.ajax("/api/v1/users/" + id, {
+      method: "get",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      success: (resp) => {
+        store.dispatch({
+          type: 'USERS_LIST',
+          user: resp.data,
+        });
+      },
+    });
+  }
+
   submit_login(data) {
     $.ajax("/api/v1/token", {
       method: "post",

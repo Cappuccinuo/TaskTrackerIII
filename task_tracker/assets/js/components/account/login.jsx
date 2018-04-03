@@ -45,19 +45,23 @@ class Login extends React.Component {
     });
   }
 
-  get_current_user_name(user_id) {
-    let user = _.filter(this.props.users, (uu) => user_id == uu.id);
-    console.log("user is", this.props);
-    return user[0].name;
+  get_current_user_name(users, user_id) {
+    let user = "";
+    _.map(users, (uu) => {
+      if (uu.id == user_id) {
+        user = uu;
+      }
+    })
+    return user.name;
   }
 
   render() {
     if (this.props.token) {
-      //let user_name = this.get_current_user_name(this.props.token.user_id);
-      //console.log("props", this.props);
+      console.log("props", this.props.users);
+      let user_name = this.get_current_user_name(this.props.users, this.props.token.user_id);
 
       return <div className="navbar-text">
-        <span>Welcome back, { this.props.token.user_id }</span>
+        <span>Welcome back, { user_name }</span>
         <Button onClick={this.delete_token}>Log out</Button>
       </div>;
     }

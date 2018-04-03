@@ -1,6 +1,6 @@
 import React                                                    from 'react';
 import ReactDOM                                                 from 'react-dom';
-import { BrowserRouter as Router, Route, Redirect }             from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, Switch }     from 'react-router-dom';
 import { Provider, connect }                                    from 'react-redux';
 import Nav                                                      from './nav'
 import Users                                                    from './account/users'
@@ -47,7 +47,7 @@ class TaskTracker extends React.Component {
     let isLoggedIn = (this.props.token != null);
     return <Router>
       <div>
-        <Nav />
+        <Nav/>
         <div>
           <Route path="/users" exact={true} render={() =>
             isLoggedIn ? (

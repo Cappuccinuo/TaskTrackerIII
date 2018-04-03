@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Input } from 'reactstrap';
 import api from 'js/api';
+import { Link } from 'react-router-dom';
+import { Form, FormGroup, Input, Button } from 'reactstrap';
 
 function Signup(props) {
   console.log("props@SignupForm", props);
@@ -49,6 +50,7 @@ function Signup(props) {
       </div>
       <button onClick={submit} className="btn btn-primary">Sign up</button>
       <button onClick={clear} className="btn btn-primary">Reset</button>
+      <Link to={"/"} style={{ textDecoration: 'none', color: 'white'}}><Button color="primary">Back</Button></Link>
     </form>
   );
 }
