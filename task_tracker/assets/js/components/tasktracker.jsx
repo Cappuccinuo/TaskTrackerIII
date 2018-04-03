@@ -66,6 +66,15 @@ class TaskTracker extends React.Component {
               <Redirect to="/"></Redirect>
             )} />
 
+          <Switch>
+            <Route path="/newtask" render={() =>
+                <Newtask boss_id={this.props.token.user_id}/>} />
+            <Route path="/tasks/:task_id/edit" render={({match}) =>
+                <Taskedit task={filter(this.props.tasks, match.params.task_id)} update_id={match.params.task_id}/>} />
+            <Route path="/tasks/:task_id/modify" render={({match}) =>
+                <Taskmodify task={filter(this.props.tasks, match.params.task_id)} modify_id={match.params.task_id}/>} />
+          </Switch>
+
           <Route path="/mytasks" exact={true} render={() =>
             isLoggedIn ? (
               <Mytasks tasks={_.filter(this.props.tasks, (tt) =>
@@ -80,27 +89,6 @@ class TaskTracker extends React.Component {
             ) : (
               <Redirect to="/"></Redirect>
             )} />
-
-          <Route path="/newtask" exact={true} render={() =>
-             isLoggedIn ? (
-               <Newtask boss_id={this.props.token.user_id}/>
-             ) : (
-               <Redirect to="/"></Redirect>
-             )} />
-
-          <Route path="/tasks/:task_id/edit" exact={true} render={({match}) =>
-             isLoggedIn ? (
-               <Taskedit task={filter(this.props.tasks, match.params.task_id)} update_id={match.params.task_id}/>
-             ) : (
-               <Redirect to="/"></Redirect>
-             )}/>
-
-          <Route path="/tasks/:task_id/modify" exact={true} render={({match}) =>
-             isLoggedIn ? (
-               <Taskmodify task={filter(this.props.tasks, match.params.task_id)} modify_id={match.params.task_id}/>
-             ) : (
-               <Redirect to="/"></Redirect>
-             )}/>
 
           <Route path="/" exact={true} render={() =>
             <div className="jumbotron">
