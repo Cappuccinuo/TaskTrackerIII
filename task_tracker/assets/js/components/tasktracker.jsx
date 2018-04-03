@@ -35,20 +35,34 @@ function filter(tasks, id) {
 }
 
 class TaskTracker extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      token: undefined,
+    };
+  }
+
   componentWillMount() {
     let token = this.props.cookies.get('token');
     this.props.dispatch({
       type: "SET_TOKEN",
       token: token
     });
+    this.setState({ token });
   }
 
   render() {
-    let isLoggedIn = (this.props.token != null);
+    let isLoggedIn = (this.state.token != null);
     return <Router>
       <div>
         <Nav/>
         <div>
+          <Route path="/" exact={true} render={() =>
+            <div className="jumbotron">
+              <h2>Welcome to Task Tracker</h2>
+              <p className="lead">A simple web application that<br />helps you and your friends follow through tasks efficiently.</p>
+            </div>} />
+
           <Route path="/users" exact={true} render={() =>
             isLoggedIn ? (
               <Users users={this.props.users} />
@@ -56,19 +70,19 @@ class TaskTracker extends React.Component {
               <Redirect to="/"></Redirect>
             )} />
 
-          <Route path="/signup" exact={true} render={() =>
-            <Signup />} />
-
           <Route path="/tasks" exact={true} render={() =>
+              <Tasks tasks={this.props.tasks}/>} />
+
+          <Route path="/signup" exact={true} render={() =>
             isLoggedIn ? (
-              <Tasks tasks={this.props.tasks} user_id={this.props.token.user_id}/>
-            ) : (
               <Redirect to="/"></Redirect>
+            ) : (
+              <Signup />
             )} />
 
           <Switch>
             <Route path="/newtask" render={() =>
-                <Newtask boss_id={this.props.token.user_id}/>} />
+                <Newtask boss_id={this.state.token.user_id}/>} />
             <Route path="/tasks/:task_id/edit" render={({match}) =>
                 <Taskedit task={filter(this.props.tasks, match.params.task_id)} update_id={match.params.task_id}/>} />
             <Route path="/tasks/:task_id/modify" render={({match}) =>
@@ -78,23 +92,19 @@ class TaskTracker extends React.Component {
           <Route path="/mytasks" exact={true} render={() =>
             isLoggedIn ? (
               <Mytasks tasks={_.filter(this.props.tasks, (tt) =>
-                tt.user.id == this.props.token.user_id)} />
+                tt.user.id == this.state.token.user_id)} />
             ) : (
               <Redirect to="/"></Redirect>
             )} />
 
           <Route path="/myassigned" exact={true} render={() =>
             isLoggedIn ? (
-              <Myassigned tasks={this.props.tasks} user_id={this.props.token.user_id} />
+              <Myassigned tasks={this.props.tasks} user_id={this.state.token.user_id} />
             ) : (
               <Redirect to="/"></Redirect>
             )} />
 
-          <Route path="/" exact={true} render={() =>
-            <div className="jumbotron">
-              <h2>Welcome to Task Tracker</h2>
-              <p className="lead">A simple web application that<br />helps you and your friends follow through tasks efficiently.</p>
-            </div>} />
+
         </div>
       </div>
     </Router>
