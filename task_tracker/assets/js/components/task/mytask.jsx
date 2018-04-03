@@ -10,7 +10,7 @@ function Task(params) {
       <td>{params.task.description}</td>
       <td>{completed}</td>
       <td>{params.task.time}</td>
-      <td>{params.task.user.name}</td>
+      <td>{params.task.boss.name}</td>
       <td><Link to={"/tasks/" + params.task.id + "/edit"} style={{ textDecoration: 'none', color: 'white'}}><Button color="primary">Edit</Button></Link></td>
     </tr>;
 }
@@ -27,7 +27,7 @@ export default function Mytasks(params) {
             <th scope="col">Description</th>
             <th scope="col">Completed</th>
             <th scope="col">Time</th>
-            <th scope="col">Worker</th>
+            <th scope="col">Boss</th>
             <th scope="col"></th>
           </tr>
         </thead>

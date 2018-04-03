@@ -6,8 +6,21 @@ function tasks(state = [], action) {
   case 'TASKS_LIST':
     return [...action.tasks];
   case 'UPDATE_TASK':
-    state[action.data.id] = action.data;
-    return state;
+    let anotherTask = action.task;
+    let ind = -1;
+    let prevTask = {};
+    _.each(state, function(tt, index) {
+      if (tt.id == action.task_id) {
+        ind = index;
+        prevTask = tt;
+      }
+    })
+    console.log(anotherTask);
+    console.log(prevTask);
+    anotherTask.title = prevTask.title;
+    anotherTask.description = prevTask.description;
+    let ns = _.filter(state, (tt) => tt.id != action.task_id);
+    return [anotherTask, ...ns];
   case 'MODIFY_TASK':
     let newTask = action.task;
     let i = -1;

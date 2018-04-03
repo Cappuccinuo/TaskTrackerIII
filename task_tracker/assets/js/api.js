@@ -86,6 +86,7 @@ class TheServer {
         store.dispatch({
           type: 'UPDATE_TASK',
           task: resp.data,
+          task_id: id,
         });
       },
     });

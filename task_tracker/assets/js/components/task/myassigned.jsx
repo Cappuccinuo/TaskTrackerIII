@@ -12,7 +12,6 @@ function TaskSpecific(params) {
 
   if (completed == "completed") {
     return <tr>
-        <td>{params.task.id}</td>
         <td>{params.task.title}</td>
         <td>{params.task.description}</td>
         <td>{completed}</td>
@@ -23,7 +22,6 @@ function TaskSpecific(params) {
   }
   else {
     return <tr>
-        <td>{params.task.id}</td>
         <td>{params.task.title}</td>
         <td>{params.task.description}</td>
         <td>{completed}</td>
@@ -49,7 +47,6 @@ export default function Myassigned(params) {
         <table className="table table-bordered">
           <thead>
             <tr>
-              <th scope="col">Id</th>
               <th scope="col">Title</th>
               <th scope="col">Description</th>
               <th scope="col">Completed</th>
@@ -69,7 +66,6 @@ export default function Myassigned(params) {
         <table className="table table-bordered">
           <thead>
             <tr>
-              <th scope="col">Id</th>
               <th scope="col">Title</th>
               <th scope="col">Description</th>
               <th scope="col">Completed</th>
