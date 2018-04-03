@@ -101,6 +101,7 @@ class TheServer {
         store.dispatch({
           type: 'MODIFY_TASK',
           task: resp.data,
+          task_id: id,
         });
       },
     });

@@ -23,6 +23,7 @@ class Taskmodify extends React.Component {
     let action = {
       type: 'MODIFY_FORM',
       data: data,
+      id: this.props.modify_id,
     };
     this.props.dispatch(action);
   }

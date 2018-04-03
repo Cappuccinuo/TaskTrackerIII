@@ -6,9 +6,23 @@ function tasks(state = [], action) {
   case 'TASKS_LIST':
     return [...action.tasks];
   case 'UPDATE_TASK':
-    return [action.task, ...state];
+    state[action.data.id] = action.data;
+    return state;
   case 'MODIFY_TASK':
-    return [action.task, ...state];
+    let newTask = action.task;
+    let i = -1;
+    let originTask = {};
+    _.each(state, function(tt, index) {
+      if (tt.id == action.task_id) {
+        i = index;
+        originTask = tt;
+      }
+    })
+    newTask.completed = originTask.completed;
+    newTask.time = originTask.completed;
+    console.log(newTask);
+    let newstate = _.filter(state, (tt) => tt.id != action.task_id);
+    return [newTask, ...newstate];
   case 'ADD_TASK':
     return [action.task, ...state];
   case 'DELETE_TASK':
