@@ -4,7 +4,6 @@ import { Input } from 'reactstrap';
 import api from 'js/api';
 
 function Newtask(props) {
-  console.log("props@TaskForm", props);
 
   function update(ev) {
     let tgt = $(ev.target);
@@ -27,13 +26,11 @@ function Newtask(props) {
       type: 'UPDATE_FORM',
       data: data,
     };
-    console.log(action);
     props.dispatch(action);
   }
 
   function submit(ev) {
     api.submit_task(props.form);
-    console.log(props.form);
   }
 
   function clear(ev) {

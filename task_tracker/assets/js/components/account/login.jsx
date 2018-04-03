@@ -21,7 +21,6 @@ class Login extends React.Component {
       else {
         this.props.cookies.remove("token");
       }
-      console.log("cookie", this.props.cookies);
     }
   }
 
@@ -57,7 +56,6 @@ class Login extends React.Component {
 
   render() {
     if (this.props.token) {
-      console.log("props", this.props.users);
       let user_name = this.get_current_user_name(this.props.users, this.props.token.user_id);
 
       return <div className="navbar-text">
@@ -105,7 +103,6 @@ class Login extends React.Component {
 }
 
 function state2props(state) {
-  console.log(state.token);
   return {
     login: state.login,
     token: state.token,

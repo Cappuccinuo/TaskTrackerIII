@@ -3,11 +3,21 @@ import { connect } from 'react-redux';
 import api from 'js/api';
 import { Link } from 'react-router-dom';
 import { Form, FormGroup, Input, Button } from 'reactstrap';
+import { Redirect } from 'react-router'
+import swal from 'sweetalert';
 
-function Signup(props) {
-  console.log("props@SignupForm", props);
+class Signup extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      redirect: false
+    }
+    this.update = this.update.bind(this);
+    this.submit = this.submit.bind(this);
+    this.clear = this.clear.bind(this);
+  }
 
-  function update(ev) {
+  update(ev) {
     let tgt = $(ev.target);
     let data = {};
     data[tgt.attr('name')] = tgt.val();
@@ -15,44 +25,62 @@ function Signup(props) {
       type: 'UPDATE_SIGNUP_FORM',
       data: data,
     };
-    console.log(action);
-    props.dispatch(action);
+    this.props.dispatch(action);
   }
 
-  function submit(ev) {
-    api.submit_user(props.signup);
+  submit(ev) {
+    console.log("props signup is ", this.props.signup);
+    api.submit_user(this.props.signup);
+
+    swal({
+      title: "Create Success!",
+      text: "You can log in now",
+      icon: "success",
+    });
+    this.setState({ redirect: true });
   }
 
-  function clear(ev) {
-    props.dispatch({
+  clear(ev) {
+    this.props.dispatch({
       type: 'CLEAR_FORM',
     });
   }
 
-  return (
-    <form>
-      <h2>New User</h2>
-      <div className="form-group">
-        <label>Name</label>
-        <input className="form-control" name="name"
-          value={props.signup.name} onChange={update}/>
+  render() {
+    const { from } = '/';
+    const { redirect } = this.state;
+
+    return (
+      <div>
+      <form>
+        <h2>New User</h2>
+        <div className="form-group">
+          <label>Name</label>
+          <input className="form-control" name="name"
+            value={this.props.signup.name} onChange={this.update} required/>
+        </div>
+        <div className="form-group">
+          <label>Email</label>
+          <input className="form-control"
+            name="email" type="email" value={this.props.signup.email}
+            onChange={this.update} required/>
+        </div>
+        <div className="form-group">
+           <label>Password</label>
+           <Input type="password" name="password" placeholder="password"
+                  value={this.props.signup.password} onChange={this.update} required/>
+        </div>
+        <button onClick={this.submit} className="btn btn-primary">Sign up</button>
+        <button onClick={this.clear} className="btn btn-primary">Reset</button>
+        <Link to={"/"} style={{ textDecoration: 'none', color: 'white'}}><Button color="primary">Back</Button></Link>
+      </form>
+      {redirect && (
+          <Redirect to={from || '/'}/>
+        )}
       </div>
-      <div className="form-group">
-        <label>Email</label>
-        <input className="form-control"
-          name="email" value={props.signup.email}
-          onChange={update} />
-      </div>
-      <div className="form-group">
-         <label>Password</label>
-         <Input type="password" name="password" placeholder="password"
-                value={props.signup.password} onChange={update} />
-      </div>
-      <button onClick={submit} className="btn btn-primary">Sign up</button>
-      <button onClick={clear} className="btn btn-primary">Reset</button>
-      <Link to={"/"} style={{ textDecoration: 'none', color: 'white'}}><Button color="primary">Back</Button></Link>
-    </form>
-  );
+    );
+  }
+
 }
 
 

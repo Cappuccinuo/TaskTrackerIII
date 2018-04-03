@@ -62,7 +62,6 @@ function Nav(props) {
 }
 
 function state2props(state) {
-  console.log(state.token);
   return {
     token: state.token,
   };

@@ -24,16 +24,18 @@ class Taskmodify extends React.Component {
       type: 'MODIFY_FORM',
       data: data,
     };
-    console.log(action);
     this.props.dispatch(action);
   }
 
   submit(ev) {
     ev.preventDefault();
     api.modify_task(this.props.modify_form, this.props.modify_id);
+    swal({
+      title: "Modify Success!",
+      text: "You can check the task now",
+      icon: "success",
+    });
     this.setState({ redirect: true });
-    console.log(this.props.modify_form);
-    console.log(this.props.modify_id);
   }
 
 

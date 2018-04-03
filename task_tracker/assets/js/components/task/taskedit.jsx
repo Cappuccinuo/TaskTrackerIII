@@ -5,8 +5,6 @@ import api from 'js/api';
 import { Link } from 'react-router-dom';
 
 function Taskedit(props) {
-  console.log("props@TaskEdit", props);
-
   function update(ev) {
     let tgt = $(ev.target);
     let data = {};
@@ -24,14 +22,11 @@ function Taskedit(props) {
       type: 'UPDATE_FORM',
       data: data,
     };
-    console.log(action);
     props.dispatch(action);
   }
 
   function submit(ev) {
     api.update_task(props.update_form, props.update_id);
-    console.log(props.update_form);
-    console.log(props.update_id);
   }
 
   let task = props.task;
