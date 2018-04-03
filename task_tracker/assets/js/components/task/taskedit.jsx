@@ -67,7 +67,7 @@ class Taskedit extends React.Component {
           </div>
           <div className="form-group">
               <label className="form-check-label">
-                <h3>Time Spent</h3>
+                <h3>Time Spent(min)</h3>
               </label>
               <input className="form-control" type="number" step="15" min="0"
                 name="time" value={this.props.update_form.time} onChange={this.update}/>

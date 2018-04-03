@@ -70,7 +70,11 @@ class TaskTracker extends React.Component {
             )} />
 
           <Route path="/tasks" exact={true} render={() =>
-              <Tasks tasks={this.props.tasks}/>} />
+            isLoggedIn ? (
+              <Tasks tasks={this.props.tasks}/>
+            ) : (
+              <Redirect to="/"></Redirect>
+            )} />
 
           <Route path="/signup" exact={true} render={() =>
             isLoggedIn ? (
@@ -88,9 +92,17 @@ class TaskTracker extends React.Component {
 
           <Switch>
             <Route path="/tasks/:task_id/edit" render={({match}) =>
-                <Taskedit task={filter(this.props.tasks, match.params.task_id)} update_id={match.params.task_id}/>} />
+              isLoggedIn ? (
+                <Taskedit task={filter(this.props.tasks, match.params.task_id)} update_id={match.params.task_id}/>
+              ) : (
+                <Redirect to="/"></Redirect>
+              )} />
             <Route path="/tasks/:task_id/modify" render={({match}) =>
-                <Taskmodify task={filter(this.props.tasks, match.params.task_id)} modify_id={match.params.task_id}/>} />
+              isLoggedIn ? (
+                <Taskmodify task={filter(this.props.tasks, match.params.task_id)} modify_id={match.params.task_id}/>
+              ) : (
+                <Redirect to="/"></Redirect>
+              )} />
           </Switch>
 
           <Route path="/mytasks" exact={true} render={() =>
