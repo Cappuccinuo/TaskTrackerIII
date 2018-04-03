@@ -5,6 +5,7 @@ import api from '../api';
 import { connect } from 'react-redux';
 import { Form, FormGroup, Input, Button } from 'reactstrap';
 import { CookiesProvider } from 'react-cookie';
+import swal from 'sweetalert';
 
 let Session = connect(({token, users}) => {return {token, users};})((props) => {
   function delete_token(ev) {
@@ -23,47 +24,63 @@ let Session = connect(({token, users}) => {return {token, users};})((props) => {
 });
 
 function Nav(props) {
-  return <header className="header">
-    <nav role="navigation">
-      <ul className="nav nav-pills pull-right">
-        <li>
-          <NavLink to="/" exact={true} activeClassName="active" className="nav-link">
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/users" exact={false} activeClassName="active" className="nav-link">
-            All Users
-          </NavLink>
-        </li>
-        <li>
-          <div className="dropdown">
-            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Tasks
-            </button>
-            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <NavLink to="/tasks" exact={true} activeClassName="active" className="nav-link">
-                All Tasks
-              </NavLink>
-              <NavLink to="/newtask" exact={true} activeClassName="active" className="nav-link">
-                New Task
-              </NavLink>
-              <NavLink to="/mytasks" exact={true} activeClassName="active" className="nav-link">
-                My Todo Task
-              </NavLink>
-              <NavLink to="/myassigned" exact={true} activeClassName="active" className="nav-link">
-                My Assigned Task
-              </NavLink>
+  let isLoggedIn = (props.token != null);
+  if (isLoggedIn) {
+    return <header className="header">
+      <nav role="navigation">
+        <ul className="nav nav-pills pull-right">
+          <li>
+            <NavLink to="/" exact={true} activeClassName="active" className="nav-link">
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/users" exact={false} activeClassName="active" className="nav-link">
+              All Users
+            </NavLink>
+          </li>
+          <li>
+            <div className="dropdown">
+              <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Tasks
+              </button>
+              <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <NavLink to="/tasks" exact={true} activeClassName="active" className="nav-link">
+                  All Tasks
+                </NavLink>
+                <NavLink to="/newtask" exact={true} activeClassName="active" className="nav-link">
+                  New Task
+                </NavLink>
+                <NavLink to="/mytasks" exact={true} activeClassName="active" className="nav-link">
+                  My Todo Task
+                </NavLink>
+                <NavLink to="/myassigned" exact={true} activeClassName="active" className="nav-link">
+                  My Assigned Task
+                </NavLink>
+              </div>
             </div>
-          </div>
-        </li>
-        <li>
-          <Login users={props.users}/>
-        </li>
-      </ul>
-    </nav>
-    <span className="logo"></span>
-  </header>;
+          </li>
+          <li>
+            <Login/>
+          </li>
+        </ul>
+      </nav>
+      <span className="logo"></span>
+    </header>;
+  }
+  else {
+    return <header className="header">
+      <nav role="navigation">
+        <ul className="nav nav-pills pull-right">
+          <li>
+            <Login/>
+          </li>
+        </ul>
+        <span className="logo"></span>
+      </nav>
+
+    </header>;
+  }
 }
 
 function state2props(state) {

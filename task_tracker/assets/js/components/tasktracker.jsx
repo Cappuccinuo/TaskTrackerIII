@@ -13,6 +13,7 @@ import Signup                                                   from './account/
 import Mytasks                                                  from './task/mytask'
 import Myassigned                                               from './task/myassigned'
 import { CookiesProvider, withCookies, Cookies, cookie }        from 'react-cookie';
+import Login                                                    from "./account/login";
 
 export default function tasktracker_init(store) {
   ReactDOM.render(
@@ -45,39 +46,76 @@ class TaskTracker extends React.Component {
   }
 
   render() {
+    let isLoggedIn = (this.props.token != null);
     return <Router>
       <div>
         <Nav />
         <div>
           <Route path="/users" exact={true} render={() =>
-            <Users users={this.props.users} />} />
+            isLoggedIn ? (
+              <Users users={this.props.users} />
+            ) : (
+              <Redirect to="/"></Redirect>
+            )} />
+
           <Route path="/signup" exact={true} render={() =>
             <Signup />} />
+
           <Route path="/tasks" exact={true} render={() =>
-            <Tasks tasks={this.props.tasks} user_id={this.props.token.user_id}/>} />
-          <Route path="/mytasks" exact={true} render={() =>
-            <Mytasks tasks={_.filter(this.props.tasks, (tt) =>
-              tt.user.id == this.props.token.user_id)} />} />
-          <Route path="/myassigned" exact={true} render={() =>
-            <Myassigned tasks={this.props.tasks} user_id={this.props.token.user_id} />} />
-          <Route path="/newtask" exact={true} render={() =>
-            <Newtask />} />
-          <Route path="/tasks/:task_id" exact={true} render={({match}) =>
-            <TaskInfo task={filter(this.props.tasks, match.params.task_id)}/> }/>
-          <Route path="/tasks/:task_id/edit" exact={true} render={({match}) =>
-            <Taskedit task={filter(this.props.tasks, match.params.task_id)} update_id={match.params.task_id}/> }/>
-          <Route path="/tasks/:task_id/modify" exact={true} render={({match}) =>
-            <Taskmodify task={filter(this.props.tasks, match.params.task_id)} modify_id={match.params.task_id}/> }/>
-          <Route path="/" exact={true} render={() =>
-            this.props.state.token ? (
-              <Redirect to="/"></Redirect>
+            isLoggedIn ? (
+              <Tasks tasks={this.props.tasks} user_id={this.props.token.user_id}/>
             ) : (
+              <Redirect to="/"></Redirect>
+            )} />
+
+          <Route path="/mytasks" exact={true} render={() =>
+            isLoggedIn ? (
+              <Mytasks tasks={_.filter(this.props.tasks, (tt) =>
+                tt.user.id == this.props.token.user_id)} />
+            ) : (
+              <Redirect to="/"></Redirect>
+            )} />
+
+          <Route path="/myassigned" exact={true} render={() =>
+            isLoggedIn ? (
+              <Myassigned tasks={this.props.tasks} user_id={this.props.token.user_id} />
+            ) : (
+              <Redirect to="/"></Redirect>
+            )} />
+
+          <Route path="/newtask" exact={true} render={() =>
+            isLoggedIn ? (
+              <Newtask />
+            ) : (
+              <Redirect to="/"></Redirect>
+            )} />
+
+          <Route path="/tasks/:task_id" exact={true} render={({match}) =>
+            isLoggedIn ? (
+              <TaskInfo task={filter(this.props.tasks, match.params.task_id)}/>
+            ) : (
+              <Redirect to="/"></Redirect>
+            )}/>
+
+          <Route path="/tasks/:task_id/edit" exact={true} render={({match}) =>
+            isLoggedIn ? (
+              <Taskedit task={filter(this.props.tasks, match.params.task_id)} update_id={match.params.task_id}/>
+            ) : (
+              <Redirect to="/"></Redirect>
+            )}/>
+
+          <Route path="/tasks/:task_id/modify" exact={true} render={({match}) =>
+            isLoggedIn ? (
+              <Taskmodify task={filter(this.props.tasks, match.params.task_id)} modify_id={match.params.task_id}/>
+            ) : (
+              <Redirect to="/"></Redirect>
+            )}/>
+
+          <Route path="/" exact={true} render={() =>
             <div className="jumbotron">
               <h2>Welcome to Task Tracker</h2>
               <p className="lead">A simple web application that<br />helps you and your friends follow through tasks efficiently.</p>
-            </div>
-            )
-          } />
+            </div>} />
         </div>
       </div>
     </Router>
