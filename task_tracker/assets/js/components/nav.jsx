@@ -11,42 +11,46 @@ function Nav(props) {
   const toggleVisible = isLoggedIn ? 'visible' : 'hidden';
   let style = {
     visibility: toggleVisible,
+    marginTop: '15%',
+  };
+  let loginstyle = {
+    marginTop: '8%',
   };
   return <header className="header">
     <nav role="navigation">
       <ul className="nav nav-pills pull-right">
         <li style={style}>
-          <NavLink to="/" exact={true} activeClassName="active" className="nav-link">
+          <NavLink to="/">
             Home
           </NavLink>
         </li>
         <li style={style}>
-          <NavLink to="/users" exact={false} activeClassName="active" className="nav-link">
+          <NavLink to="/users">
             All Users
           </NavLink>
         </li>
         <li style={style}>
           <div className="dropdown">
-            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button className="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Tasks
             </button>
             <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <NavLink to="/tasks" exact={true} activeClassName="active" className="nav-link">
+              <NavLink to="/tasks" className="nav-link">
                 All Tasks
               </NavLink>
-              <NavLink to="/newtask" exact={true} activeClassName="active" className="nav-link">
+              <NavLink to="/newtask" className="nav-link">
                 New Task
               </NavLink>
-              <NavLink to="/mytasks" exact={true} activeClassName="active" className="nav-link">
+              <NavLink to="/mytasks" className="nav-link">
                 My Todo Task
               </NavLink>
-              <NavLink to="/myassigned" exact={true} activeClassName="active" className="nav-link">
+              <NavLink to="/myassigned" className="nav-link">
                 My Assigned Task
               </NavLink>
             </div>
           </div>
         </li>
-        <li>
+        <li style={loginstyle}>
           <CookiesProvider>
             <Login/>
           </CookiesProvider>

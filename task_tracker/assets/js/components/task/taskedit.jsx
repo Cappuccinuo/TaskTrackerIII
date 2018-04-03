@@ -46,7 +46,7 @@ function Taskedit(props) {
       <form>
         <div className="form-group">
             <label className="form-check-label">
-              Complete
+              <h3>Complete</h3>
             </label>
             <br />
             <input className="form-check-input" type="checkbox" name="completed"
@@ -54,13 +54,13 @@ function Taskedit(props) {
         </div>
         <div className="form-group">
             <label className="form-check-label">
-              Time Spent
+              <h3>Time Spent</h3>
             </label>
             <input className="form-control" type="number" step="15" min="0"
               name="time" value={props.update_form.time} onChange={update}/>
         </div>
-        <button onClick={submit} className="btn btn-primary">Submit</button>
-        <Link to={"/tasks/" + props.update_id} style={{ textDecoration: 'none', color: 'white'}}><Button color="primary">Back</Button></Link>
+        <button style={{marginRight: '10px'}} onClick={submit} className="btn btn-primary">Submit</button>
+        <Link to={"/mytasks/"} style={{ textDecoration: 'none', color: 'white'}}><Button color="primary">Back</Button></Link>
       </form>
     </div>
   );
