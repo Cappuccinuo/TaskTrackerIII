@@ -6,37 +6,26 @@ import { connect } from 'react-redux';
 import { Form, FormGroup, Input, Button } from 'reactstrap';
 import { CookiesProvider } from 'react-cookie';
 
-let Session = connect(({token, users}) => {return {token, users};})((props) => {
-  function delete_token(ev) {
-    props.dispatch({
-      type: "DELETE_TOKEN",
-    });
-  }
-
-  let user = _.filter(props.users, (uu) => props.token.user_id == uu.id);
-  let user_name = user[0].name;
-
-  return <div className="navbar-text">
-    <span>Welcome back, { user_name }</span>
-    <Button onClick={delete_token}>Log out</Button>
-  </div>;
-});
-
 function Nav(props) {
+  let isLoggedIn = (props.token != null);
+  const toggleVisible = isLoggedIn ? 'visible' : 'hidden';
+  let style = {
+    visibility: toggleVisible,
+  };
   return <header className="header">
     <nav role="navigation">
       <ul className="nav nav-pills pull-right">
-        <li>
+        <li style={style}>
           <NavLink to="/" exact={true} activeClassName="active" className="nav-link">
             Home
           </NavLink>
         </li>
-        <li>
+        <li style={style}>
           <NavLink to="/users" exact={false} activeClassName="active" className="nav-link">
             All Users
           </NavLink>
         </li>
-        <li>
+        <li style={style}>
           <div className="dropdown">
             <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Tasks
@@ -58,7 +47,9 @@ function Nav(props) {
           </div>
         </li>
         <li>
-          <Login users={props.users}/>
+          <CookiesProvider>
+            <Login />
+          </CookiesProvider>
         </li>
       </ul>
     </nav>
