@@ -48,11 +48,10 @@ class TaskTracker extends React.Component {
       type: "SET_TOKEN",
       token: token
     });
-    this.setState({ token });
   }
 
   render() {
-    let isLoggedIn = (this.state.token != null);
+    let isLoggedIn = (this.props.token != null);
     return <Router>
       <div>
         <Nav/>
@@ -80,9 +79,14 @@ class TaskTracker extends React.Component {
               <Signup />
             )} />
 
+          <Route path="/newtask" render={() =>
+            isLoggedIn ? (
+              <Newtask boss_id={this.props.token.user_id}/>
+            ) : (
+              <Redirect to="/"></Redirect>
+            )} />
+
           <Switch>
-            <Route path="/newtask" render={() =>
-                <Newtask boss_id={this.state.token.user_id}/>} />
             <Route path="/tasks/:task_id/edit" render={({match}) =>
                 <Taskedit task={filter(this.props.tasks, match.params.task_id)} update_id={match.params.task_id}/>} />
             <Route path="/tasks/:task_id/modify" render={({match}) =>
@@ -92,14 +96,14 @@ class TaskTracker extends React.Component {
           <Route path="/mytasks" exact={true} render={() =>
             isLoggedIn ? (
               <Mytasks tasks={_.filter(this.props.tasks, (tt) =>
-                tt.user.id == this.state.token.user_id)} />
+                tt.user.id == this.props.token.user_id)} />
             ) : (
               <Redirect to="/"></Redirect>
             )} />
 
           <Route path="/myassigned" exact={true} render={() =>
             isLoggedIn ? (
-              <Myassigned tasks={this.props.tasks} user_id={this.state.token.user_id} />
+              <Myassigned tasks={this.props.tasks} user_id={this.props.token.user_id} />
             ) : (
               <Redirect to="/"></Redirect>
             )} />

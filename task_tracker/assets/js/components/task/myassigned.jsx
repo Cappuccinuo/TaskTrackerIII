@@ -7,7 +7,23 @@ function TaskSpecific(params) {
   let completed = (params.task.completed == "1") ? "completed" : "pending";
 
   function del(ev) {
-    api.delete_task(params.task.id);
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        api.delete_task(params.task.id);
+        swal("Poof! Your file has been deleted!", {
+          icon: "success",
+        });
+      } else {
+        swal("Your file is safe!");
+      }
+    });
   }
 
   if (completed == "completed") {

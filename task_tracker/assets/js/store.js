@@ -15,8 +15,6 @@ function tasks(state = [], action) {
         prevTask = tt;
       }
     })
-    console.log(anotherTask);
-    console.log(prevTask);
     anotherTask.title = prevTask.title;
     anotherTask.description = prevTask.description;
     let ns = _.filter(state, (tt) => tt.id != action.task_id);
@@ -32,7 +30,7 @@ function tasks(state = [], action) {
       }
     })
     newTask.completed = originTask.completed;
-    newTask.time = originTask.completed;
+    newTask.time = originTask.time;
     console.log(newTask);
     let newstate = _.filter(state, (tt) => tt.id != action.task_id);
     return [newTask, ...newstate];

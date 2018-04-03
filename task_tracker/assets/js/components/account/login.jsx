@@ -17,7 +17,7 @@ class Login extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if(prevProps.token != this.props.token) {
+    if(prevProps.token !== this.props.token) {
       if(this.props.token) {
         this.props.cookies.set("token", this.props.token);
       }
@@ -51,12 +51,16 @@ class Login extends React.Component {
     this.props.dispatch({
       type: "DELETE_TOKEN",
     });
-    this.setState({ redirect: true });
     swal({
       title: "Log out Success!",
       text: "Have a good one!",
       icon: "success",
     });
+    this.setState({redirect: true});
+    setTimeout(function(){
+        console.log("THIS IS");
+        location.reload();
+    }, 2000);
   }
 
   get_current_user_name(users, user_id) {
