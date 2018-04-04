@@ -47,14 +47,8 @@ class TaskTracker extends React.Component {
     });
   }
 
-  componentDidUpdate() {
-    console.log(this.props);
-  }
-
   render() {
-    console.log("start");
     let isLoggedIn = (this.props.token != null);
-    console.log(isLoggedIn);
     if (isLoggedIn) {
       return <Router>
         <div>

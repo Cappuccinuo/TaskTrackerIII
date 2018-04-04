@@ -31,7 +31,6 @@ function tasks(state = [], action) {
     })
     newTask.completed = originTask.completed;
     newTask.time = originTask.time;
-    console.log(newTask);
     let newstate = _.filter(state, (tt) => tt.id != action.task_id);
     return [newTask, ...newstate];
   case 'ADD_TASK':
@@ -79,16 +78,6 @@ function form(state = empty_form, action) {
 let empty_edit_form = {
   completed: "0",
   time: "0",
-}
-
-function get_task_form(tasks, id) {
-  let task = _.filter(tasks, (tt) => (tt.id == id));
-  console.log("task is", task);
-  let edit_form = {
-    completed: task.completed,
-    time: task.time,
-  }
-  return edit_form;
 }
 
 function update_form(state = empty_edit_form, action) {
@@ -152,6 +141,7 @@ function signup(state = empty_signup_form, action) {
     case 'UPDATE_SIGNUP_FORM':
       return Object.assign({}, state, action.data);
     case 'CLEAR_SIGNUP_FORM':
+      state = empty_signup_form;
       return empty_signup_form;
     default:
       return state;

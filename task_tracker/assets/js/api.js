@@ -1,4 +1,5 @@
 import store from './store';
+import swal from 'sweetalert';
 
 class TheServer {
   request_tasks() {
@@ -10,6 +11,13 @@ class TheServer {
         store.dispatch({
           type: 'TASKS_LIST',
           tasks: resp.data,
+        });
+      },
+      error: (resp) => {
+        swal({
+          title: "Wrong!",
+          text: "Try again",
+          icon: "warning",
         });
       },
     });
@@ -26,6 +34,13 @@ class TheServer {
           users: resp.data,
         });
       },
+      error: (resp) => {
+        swal({
+          title: "Wrong!",
+          text: "Try again",
+          icon: "warning",
+        });
+      },
     });
   }
 
@@ -38,6 +53,13 @@ class TheServer {
         store.dispatch({
           type: 'USERS_LIST',
           user: resp.data,
+        });
+      },
+      error: (resp) => {
+        swal({
+          title: "Wrong!",
+          text: "Try again",
+          icon: "warning",
         });
       },
     });
@@ -56,7 +78,11 @@ class TheServer {
         });
       },
       error: (resp) => {
-        alert(resp.user_id);
+        swal({
+          title: "Wrong Combination!",
+          text: "Try again",
+          icon: "warning",
+        });
       },
     });
   }
@@ -71,6 +97,18 @@ class TheServer {
         store.dispatch({
           type: 'ADD_TASK',
           task: resp.data,
+        });
+        swal({
+          title: "Submit Task Success!",
+          text: "You can check the task now",
+          icon: "success",
+        });
+      },
+      error: (resp) => {
+        swal({
+          title: "Wrong!",
+          text: "Try again",
+          icon: "warning",
         });
       },
     });
@@ -88,6 +126,18 @@ class TheServer {
           task: resp.data,
           task_id: id,
         });
+        swal({
+          title: "Edit Success!",
+          text: "You can check the task now",
+          icon: "success",
+        });
+      },
+      error: (resp) => {
+        swal({
+          title: "Wrong!",
+          text: "Try again",
+          icon: "warning",
+        });
       },
     });
   }
@@ -103,6 +153,18 @@ class TheServer {
           type: 'MODIFY_TASK',
           task: resp.data,
           task_id: id,
+        });
+        swal({
+          title: "Modify Success!",
+          text: "You can check the task now",
+          icon: "success",
+        });
+      },
+      error: (resp) => {
+        swal({
+          title: "Wrong!",
+          text: "Try again",
+          icon: "warning",
         });
       },
     });
@@ -120,6 +182,13 @@ class TheServer {
           task_id: id,
         });
       },
+      error: (resp) => {
+        swal({
+          title: "Wrong!",
+          text: "Try again",
+          icon: "warning",
+        });
+      },
     });
   }
 
@@ -133,6 +202,18 @@ class TheServer {
         store.dispatch({
           type: 'ADD_USER',
           user: resp.data,
+        });
+        swal({
+          title: "Create Success!",
+          text: "You can log in now",
+          icon: "success",
+        });
+      },
+      error: (resp) => {
+        swal({
+          title: "Wrong!",
+          text: "Try again",
+          icon: "warning",
         });
       },
     });

@@ -39,11 +39,7 @@ class Taskedit extends React.Component {
   submit(ev) {
     api.update_task(this.props.update_form, this.props.update_id);
     this.setState({ redirect: true });
-    swal({
-      title: "Edit Success!",
-      text: "You can check the task now",
-      icon: "success",
-    });
+    
   }
 
   render() {

@@ -29,13 +29,9 @@ class Signup extends React.Component {
   }
 
   submit(ev) {
-    console.log("props signup is ", this.props.signup);
     api.submit_user(this.props.signup);
-
-    swal({
-      title: "Create Success!",
-      text: "You can log in now",
-      icon: "success",
+    this.props.dispatch({
+      type: 'CLEAR_SIGNUP_FORM',
     });
     this.setState({ redirect: true });
   }

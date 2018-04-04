@@ -42,11 +42,7 @@ class Newtask extends React.Component {
   submit(ev) {
     api.submit_task(this.props.form);
     this.setState({ redirect: true });
-    swal({
-      title: "Submit Task Success!",
-      text: "You can check the task now",
-      icon: "success",
-    });
+    
   }
 
   clear(ev) {
