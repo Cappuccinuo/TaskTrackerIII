@@ -42,7 +42,9 @@ class Newtask extends React.Component {
   submit(ev) {
     api.submit_task(this.props.form);
     this.setState({ redirect: true });
-    
+    this.props.dispatch({
+      type: 'CLEAR_FORM',
+    });
   }
 
   clear(ev) {

@@ -100,6 +100,9 @@ function modify_form(state = empty_modify_form, action) {
   switch (action.type) {
     case 'MODIFY_FORM':
       return Object.assign({}, state, action.data);
+    case 'CLEAR_MODIFY_FORM':
+      state = empty_modify_form;
+      return empty_modify_form;
     default:
       return state;
   }

@@ -13,6 +13,7 @@ class Taskmodify extends React.Component {
     }
     this.modify = this.modify.bind(this);
     this.submit = this.submit.bind(this);
+    this.clear = this.clear.bind(this);
   }
 
   modify(ev) {
@@ -31,8 +32,16 @@ class Taskmodify extends React.Component {
   submit(ev) {
     ev.preventDefault();
     api.modify_task(this.props.modify_form, this.props.modify_id);
-    
+    this.props.dispatch({
+      type: 'CLEAR_MODIFY_FORM',
+    });
     this.setState({ redirect: true });
+  }
+
+  clear(ev) {
+    this.props.dispatch({
+      type: 'CLEAR_MODIFY_FORM',
+    });
   }
 
 
@@ -76,6 +85,7 @@ class Taskmodify extends React.Component {
             </Input>
         </div>
         <button style={{marginRight: '10px'}} onClick={this.submit} className="btn btn-primary">Submit</button>
+        <button style={{marginRight: '10px'}} onClick={this.clear} className="btn btn-primary">Reset</button>
         <span>
           <Link to={"/myassigned/"} style={{ textDecoration: 'none', color: 'white'}}><Button color="primary">Back</Button></Link>
         </span>
