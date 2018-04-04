@@ -76,6 +76,11 @@ class TheServer {
           type: 'SET_TOKEN',
           token: resp,
         });
+        swal({
+          title: "Log in Success!",
+          text: "Enjoy!",
+          icon: "success",
+        });
       },
       error: (resp) => {
         swal({
