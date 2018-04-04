@@ -19,3 +19,6 @@ and password to sign up.
 
 5. After the user log out, the app will refresh later. Then user can log in
 another account.
+
+6. For the edit and modify part, I assume user will type brand new content, so
+all the value is empty value.

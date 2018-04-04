@@ -82,7 +82,7 @@ let empty_edit_form = {
 
 function update_form(state = empty_edit_form, action) {
   switch (action.type) {
-    case 'UPDATE_FORM':
+    case 'UPDATE_UPDATE_FORM':
       return Object.assign({}, state, action.data);
     case 'CLEAR_EDIT_FORM':
       state = empty_edit_form;

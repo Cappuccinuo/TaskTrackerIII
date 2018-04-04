@@ -79,7 +79,7 @@ class Newtask extends React.Component {
               <label className="form-check-label">
                 Assigned Worker
               </label>
-              <Input className="form-control" type="select"
+              <Input className="form-control" type="select" style={{lineHeight: 1.5, height: 35}}
                 name="user_id" value={this.props.form.user_id} onChange={this.update} required>
                 <option></option>
                 {users}

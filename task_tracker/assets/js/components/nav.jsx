@@ -11,11 +11,9 @@ function Nav(props) {
   const toggleVisible = isLoggedIn ? 'visible' : 'hidden';
   let style = {
     visibility: toggleVisible,
-    marginTop: '15%',
+    marginTop: '40px',
   };
-  let loginstyle = {
-    marginTop: '8%',
-  };
+
   return <header className="header">
     <nav role="navigation">
       <ul className="nav nav-pills pull-right">
@@ -50,7 +48,7 @@ function Nav(props) {
             </div>
           </div>
         </li>
-        <li style={loginstyle}>
+        <li>
           <CookiesProvider>
             <Login/>
           </CookiesProvider>

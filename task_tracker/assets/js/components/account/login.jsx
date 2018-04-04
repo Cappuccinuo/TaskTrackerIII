@@ -42,11 +42,6 @@ class Login extends React.Component {
     this.props.dispatch({
       type: "CLEAR_LOGIN_FORM",
     });
-    swal({
-      title: "Log in Success!",
-      text: "Welcome back " + this.props.login.email,
-      icon: "success",
-    });
   }
 
   delete_token(ev) {
@@ -82,7 +77,7 @@ class Login extends React.Component {
     if (this.props.token) {
       let user_name = this.get_current_user_name(this.props.users, this.props.token.user_id);
 
-      return <div className="navbar-text">
+      return <div className="navbar-text" style={{marginTop: '30px'}}>
         <h5>Welcome { user_name } <Button className="btn btn-light" onClick={this.delete_token}>  Log out</Button></h5>
       </div>;
     }

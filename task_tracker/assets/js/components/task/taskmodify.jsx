@@ -78,7 +78,7 @@ class Taskmodify extends React.Component {
             <label className="form-check-label">
               <h3>New Assigned Worker</h3>
             </label>
-            <Input className="form-control" type="select"
+            <Input className="form-control" type="select" style={{lineHeight: 1.5, height: 35}}
               name="user_id" value={this.props.modify_form.user_id} onChange={this.modify} required>
               <option></option>
               {users}

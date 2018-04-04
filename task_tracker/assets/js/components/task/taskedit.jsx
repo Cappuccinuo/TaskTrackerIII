@@ -28,7 +28,7 @@ class Taskedit extends React.Component {
     data[tgt.attr('name')] = tgt.val();
 
     let action = {
-      type: 'UPDATE_FORM',
+      type: 'UPDATE_UPDATE_FORM',
       data: data,
       task_id: this.props.update_id,
       tasks: this.props.tasks,
