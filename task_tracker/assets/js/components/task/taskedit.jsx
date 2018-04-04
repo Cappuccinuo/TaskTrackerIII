@@ -39,7 +39,9 @@ class Taskedit extends React.Component {
   submit(ev) {
     api.update_task(this.props.update_form, this.props.update_id);
     this.setState({ redirect: true });
-    
+    this.props.dispatch({
+      type: 'CLEAR_EDIT_FORM',
+    });
   }
 
   render() {

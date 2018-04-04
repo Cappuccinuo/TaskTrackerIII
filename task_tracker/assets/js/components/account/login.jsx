@@ -39,6 +39,9 @@ class Login extends React.Component {
 
   create_token(ev) {
     api.submit_login(this.props.login);
+    this.props.dispatch({
+      type: "CLEAR_LOGIN_FORM",
+    });
     swal({
       title: "Log in Success!",
       text: "Welcome back " + this.props.login.email,

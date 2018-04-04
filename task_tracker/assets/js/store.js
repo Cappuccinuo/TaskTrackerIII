@@ -84,6 +84,9 @@ function update_form(state = empty_edit_form, action) {
   switch (action.type) {
     case 'UPDATE_FORM':
       return Object.assign({}, state, action.data);
+    case 'CLEAR_EDIT_FORM':
+      state = empty_edit_form;
+      return state;
     default:
       return state;
   }
@@ -128,6 +131,9 @@ function login(state = empty_login, action) {
   switch (action.type) {
     case 'UPDATE_LOGIN_FORM':
       return Object.assign({}, state, action.data);
+    case 'CLEAR_LOGIN_FORM':
+      state = empty_login;
+      return state;
     default:
       return state;
   }
