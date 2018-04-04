@@ -81,6 +81,16 @@ let empty_edit_form = {
   time: "0",
 }
 
+function get_task_form(tasks, id) {
+  let task = _.filter(tasks, (tt) => (tt.id == id));
+  console.log("task is", task);
+  let edit_form = {
+    completed: task.completed,
+    time: task.time,
+  }
+  return edit_form;
+}
+
 function update_form(state = empty_edit_form, action) {
   switch (action.type) {
     case 'UPDATE_FORM':

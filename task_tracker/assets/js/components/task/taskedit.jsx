@@ -30,6 +30,8 @@ class Taskedit extends React.Component {
     let action = {
       type: 'UPDATE_FORM',
       data: data,
+      task_id: this.props.update_id,
+      tasks: this.props.tasks,
     };
     this.props.dispatch(action);
   }

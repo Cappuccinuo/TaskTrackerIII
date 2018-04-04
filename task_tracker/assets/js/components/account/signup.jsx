@@ -42,7 +42,7 @@ class Signup extends React.Component {
 
   clear(ev) {
     this.props.dispatch({
-      type: 'CLEAR_FORM',
+      type: 'CLEAR_SIGNUP_FORM',
     });
   }
 
@@ -56,13 +56,13 @@ class Signup extends React.Component {
         <h2>New User</h2>
         <div className="form-group">
           <label>Name</label>
-          <input className="form-control" name="name"
+          <input className="form-control" name="name" placeholder="name"
             value={this.props.signup.name} onChange={this.update} required/>
         </div>
         <div className="form-group">
           <label>Email</label>
           <input className="form-control"
-            name="email" type="email" value={this.props.signup.email}
+            name="email" type="email" placeholder="email" value={this.props.signup.email}
             onChange={this.update} required/>
         </div>
         <div className="form-group">
@@ -70,8 +70,8 @@ class Signup extends React.Component {
            <Input type="password" name="password" placeholder="password"
                   value={this.props.signup.password} onChange={this.update} required/>
         </div>
-        <button onClick={this.submit} className="btn btn-primary">Sign up</button>
-        <button onClick={this.clear} className="btn btn-primary">Reset</button>
+        <button style={{marginRight: '10px'}} onClick={this.submit} className="btn btn-primary">Sign up</button>
+        <button style={{marginRight: '10px'}} onClick={this.clear} className="btn btn-primary">Reset</button>
         <Link to={"/"} style={{ textDecoration: 'none', color: 'white'}}><Button color="primary">Back</Button></Link>
       </form>
       {redirect && (

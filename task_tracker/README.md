@@ -1,20 +1,21 @@
-# TaskTracker
+1. User need to be logged in first.
+2. If user has an account, he/she can directly log in by typing email and
+password. Otherwise he/she needs to go to sign up page, type in name, email
+and password to sign up.
+3. User can click All Users on Nav bar to see all the users.
+4. In tasks dropdown, there are four list item
+ a. All Tasks to check all tasks in database.
 
-To start your Phoenix server:
+ b. New Task to create a new task. Fill in title, description and the worker.
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
-  * Install Node.js dependencies with `cd assets && npm install`
-  * Start Phoenix endpoint with `mix phx.server`
+ c. My Todo Task to check the tasks that assigned to user.
+ User can edit the time and completed status by clicking edit button.
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+ d. My Assigned Task to check the tasks that user assigned to others or
+ him/herself.
+ They can modify the task's title, description and worker by clicking modify.
+ For completed tasks, the user can only delete the task, but cannot modify them.
+ For working tasks, the user can delete and modify the task.
 
-Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
-
-## Learn more
-
-  * Official website: http://www.phoenixframework.org/
-  * Guides: http://phoenixframework.org/docs/overview
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+5. After the user log out, the app will refresh later. Then user can log in
+another account.

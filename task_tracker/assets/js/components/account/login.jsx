@@ -39,7 +39,7 @@ class Login extends React.Component {
 
   create_token(ev) {
     api.submit_login(this.props.login);
-    console.log("login", this.props);
+    console.log("logins", this.props);
     swal({
       title: "Log in Success!",
       text: "Welcome back " + this.props.login.email,
@@ -57,7 +57,9 @@ class Login extends React.Component {
       icon: "success",
     });
     this.setState({redirect: true});
+    this.props.cookies.remove("token");
     setTimeout(function(){
+        location.reload();
         location.reload();
     }, 2500);
   }
